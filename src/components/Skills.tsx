@@ -1,185 +1,349 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { 
-  Code2, 
-  Database, 
-  Globe, 
-  Smartphone, 
-  Cloud, 
-  GitBranch,
-  Zap,
-  Shield
-} from 'lucide-react';
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
+import { Globe, Database, Smartphone, Code2, GitBranch, Zap, Shield, Cloud, TrendingUp, Star, Award, Target, CheckCircle, Rocket } from 'lucide-react';
 
 const Skills = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   const skillCategories = [
     {
       title: 'Frontend',
-      icon: <Globe className="w-8 h-8" />,
+      icon: Globe,
+      description: '사용자 인터페이스와 경험을 담당',
       skills: [
-        { name: 'React', level: 90, color: 'from-blue-500 to-blue-600' },
-        { name: 'Next.js', level: 85, color: 'from-gray-700 to-gray-800' },
-        { name: 'TypeScript', level: 80, color: 'from-blue-600 to-blue-700' },
-        { name: 'Tailwind CSS', level: 90, color: 'from-cyan-500 to-cyan-600' },
-        { name: 'HTML/CSS', level: 95, color: 'from-orange-500 to-orange-600' },
+        { name: 'React', level: 90, color: 'from-blue-500 to-blue-600', experience: '3년' },
+        { name: 'Next.js', level: 85, color: 'from-purple-500 to-purple-600', experience: '2년' },
+        { name: 'TypeScript', level: 80, color: 'from-indigo-500 to-indigo-600', experience: '2년' },
+        { name: 'Tailwind CSS', level: 90, color: 'from-cyan-500 to-cyan-600', experience: '3년' },
+        { name: 'HTML/CSS', level: 95, color: 'from-orange-500 to-orange-600', experience: '3년' }
       ]
     },
     {
       title: 'Backend',
-      icon: <Database className="w-8 h-8" />,
+      icon: Database,
+      description: '서버 사이드 로직과 데이터 처리',
       skills: [
-        { name: 'Node.js', level: 85, color: 'from-green-500 to-green-600' },
-        { name: 'Express.js', level: 80, color: 'from-gray-600 to-gray-700' },
-        { name: 'Python', level: 75, color: 'from-blue-500 to-blue-600' },
-        { name: 'Django', level: 70, color: 'from-green-600 to-green-700' },
-        { name: 'PostgreSQL', level: 75, color: 'from-blue-500 to-blue-600' },
+        { name: 'Node.js', level: 85, color: 'from-green-500 to-green-600', experience: '2년' },
+        { name: 'Express.js', level: 80, color: 'from-emerald-500 to-emerald-600', experience: '2년' },
+        { name: 'Python', level: 75, color: 'from-blue-500 to-blue-600', experience: '1년' },
+        { name: 'Django', level: 70, color: 'from-green-500 to-green-600', experience: '1년' },
+        { name: 'PostgreSQL', level: 75, color: 'from-indigo-500 to-indigo-600', experience: '2년' }
       ]
     },
     {
       title: 'Mobile & Tools',
-      icon: <Smartphone className="w-8 h-8" />,
+      icon: Smartphone,
+      description: '모바일 개발과 개발 도구',
       skills: [
-        { name: 'React Native', level: 70, color: 'from-blue-500 to-blue-600' },
-        { name: 'Git', level: 85, color: 'from-orange-500 to-orange-600' },
-        { name: 'Docker', level: 65, color: 'from-blue-500 to-blue-600' },
-        { name: 'AWS', level: 60, color: 'from-yellow-500 to-yellow-600' },
-        { name: 'Figma', level: 75, color: 'from-purple-500 to-purple-600' },
+        { name: 'React Native', level: 70, color: 'from-blue-500 to-blue-600', experience: '1년' },
+        { name: 'Git', level: 85, color: 'from-orange-500 to-orange-600', experience: '3년' },
+        { name: 'Docker', level: 65, color: 'from-blue-500 to-blue-600', experience: '1년' },
+        { name: 'AWS', level: 60, color: 'from-yellow-500 to-yellow-600', experience: '1년' },
+        { name: 'Figma', level: 75, color: 'from-purple-500 to-purple-600', experience: '2년' }
       ]
     }
   ];
 
   const additionalSkills = [
-    { name: 'RESTful APIs', icon: <Code2 className="w-6 h-6" /> },
-    { name: 'GraphQL', icon: <GitBranch className="w-6 h-6" /> },
-    { name: 'Performance Optimization', icon: <Zap className="w-6 h-6" /> },
-    { name: 'Security Best Practices', icon: <Shield className="w-6 h-6" /> },
-    { name: 'CI/CD', icon: <Cloud className="w-6 h-6" /> },
-    { name: 'Testing', icon: <Code2 className="w-6 h-6" /> },
+    { icon: Code2, name: 'RESTful APIs', description: 'API 설계 및 개발', color: 'from-blue-500 to-blue-600', level: 'Advanced' },
+    { icon: GitBranch, name: 'GraphQL', description: '데이터 쿼리 언어', color: 'from-purple-500 to-purple-600', level: 'Intermediate' },
+    { icon: Zap, name: 'Performance Optimization', description: '성능 최적화', color: 'from-yellow-500 to-yellow-600', level: 'Advanced' },
+    { icon: Shield, name: 'Security Best Practices', description: '보안 모범 사례', color: 'from-red-500 to-red-600', level: 'Intermediate' },
+    { icon: Cloud, name: 'CI/CD', description: '지속적 통합/배포', color: 'from-indigo-500 to-indigo-600', level: 'Intermediate' },
+    { icon: TrendingUp, name: 'Testing', description: '테스트 자동화', color: 'from-green-500 to-green-600', level: 'Advanced' }
+  ];
+
+  const learningSkills = [
+    { name: 'Rust', color: 'from-orange-500 to-orange-600', progress: 30 },
+    { name: 'WebAssembly', color: 'from-purple-500 to-purple-600', progress: 25 },
+    { name: 'Machine Learning', color: 'from-blue-500 to-blue-600', progress: 20 },
+    { name: 'Blockchain', color: 'from-green-500 to-green-600', progress: 15 }
+  ];
+
+  const skillLevels = [
+    { level: 'Beginner', color: 'from-gray-400 to-gray-500', range: '0-30%' },
+    { level: 'Intermediate', color: 'from-blue-400 to-blue-500', range: '31-70%' },
+    { level: 'Advanced', color: 'from-green-400 to-green-500', range: '71-90%' },
+    { level: 'Expert', color: 'from-purple-400 to-purple-500', range: '91-100%' }
   ];
 
   return (
-    <section id="skills" className="section-padding bg-gray-50">
-      <div className="max-w-7xl mx-auto">
+    <section id="skills" className="section-padding bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
+      {/* Enhanced Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ 
+            x: [0, 60, 0],
+            y: [0, -40, 0],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ 
+            duration: 25, 
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-blue-100/30 to-indigo-100/30 rounded-full blur-3xl"
+        ></motion.div>
+        
+        <motion.div
+          animate={{ 
+            x: [0, -60, 0],
+            y: [0, 50, 0],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{ 
+            duration: 30, 
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 15
+          }}
+          className="absolute bottom-20 right-20 w-[500px] h-[500px] bg-gradient-to-r from-purple-100/25 to-pink-100/25 rounded-full blur-3xl"
+        ></motion.div>
+        
+        <motion.div
+          animate={{ 
+            scale: [1, 1.4, 1],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{ 
+            duration: 20, 
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 10
+          }}
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-r from-blue-100/15 to-purple-100/15 rounded-full blur-3xl"
+        ></motion.div>
+        
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+      </div>
+
+      <div className="container-custom relative z-10">
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Technical <span className="gradient-text">Skills</span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-50 to-blue-50 px-6 py-3 rounded-full border border-indigo-200 mb-6"
+          >
+            <Target size={20} className="text-indigo-600" />
+            <span className="text-indigo-700 font-medium">Technical Skills</span>
+            <Target size={20} className="text-indigo-600" />
+          </motion.div>
+          
+          <h2 className="section-title">기술 스택</h2>
+          <p className="section-subtitle">
             다양한 기술 스택을 활용하여 효율적이고 확장 가능한 솔루션을 개발합니다.
           </p>
         </motion.div>
 
+        {/* Skill Level Legend */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mb-16"
+        >
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/50 shadow-lg">
+            <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">숙련도 기준</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {skillLevels.map((level, index) => (
+                <motion.div
+                  key={level.level}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+                  className="text-center p-3 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border border-gray-200"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className={`w-4 h-4 bg-gradient-to-r ${level.color} rounded-full mx-auto mb-2`}></div>
+                  <div className="text-sm font-semibold text-gray-800">{level.level}</div>
+                  <div className="text-xs text-gray-600">{level.range}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
         {/* Skill Categories */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid lg:grid-cols-3 gap-8 mb-24">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
-              key={categoryIndex}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              key={category.title}
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
-              viewport={{ once: true }}
-              className="bg-white p-6 rounded-2xl shadow-lg"
+              className="skill-card group hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 relative overflow-hidden"
+              whileHover={{ y: -8, scale: 1.02 }}
             >
+              {/* Hover Effect Background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              {/* Header */}
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white mr-4">
-                  {category.icon}
+                <div className="w-14 h-14 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <category.icon size={28} className="text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">{category.title}</h3>
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900">{category.title}</h3>
+                  <p className="text-sm text-gray-600">{category.description}</p>
+                </div>
               </div>
               
+              {/* Skills */}
               <div className="space-y-4">
                 {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex}>
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                    transition={{ duration: 0.5, delay: categoryIndex * 0.2 + skillIndex * 0.1 }}
+                    className="group/skill"
+                  >
                     <div className="flex justify-between items-center mb-2">
-                      <span className="font-medium text-gray-700">{skill.name}</span>
-                      <span className="text-sm text-gray-500">{skill.level}%</span>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-sm font-medium text-gray-700">{skill.name}</span>
+                        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">{skill.experience}</span>
+                      </div>
+                      <span className="text-sm font-bold text-gray-600">{skill.level}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1, delay: skillIndex * 0.1 }}
-                        viewport={{ once: true }}
-                        className={`h-2 rounded-full bg-gradient-to-r ${skill.color}`}
+                        animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
+                        transition={{ duration: 1, delay: categoryIndex * 0.2 + skillIndex * 0.1 + 0.5 }}
+                        className={`h-3 rounded-full bg-gradient-to-r ${skill.color} shadow-lg group-hover/skill:shadow-xl transition-all duration-300`}
                       />
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
+              
+              {/* Decorative Corner */}
+              <div className="absolute top-0 right-0 w-0 h-0 border-l-[25px] border-l-transparent border-t-[25px] border-t-blue-500/20 rounded-bl-lg"></div>
             </motion.div>
           ))}
         </div>
 
         {/* Additional Skills */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-8"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="mb-24"
         >
-          <h3 className="text-3xl font-bold text-gray-900 mb-8">
-            Additional <span className="gradient-text">Skills</span>
-          </h3>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
-        >
-          {additionalSkills.map((skill, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 text-center"
-            >
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg flex items-center justify-center text-blue-600 mx-auto mb-3">
-                {skill.icon}
-              </div>
-              <span className="text-sm font-medium text-gray-700">{skill.name}</span>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Learning Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mt-16 text-center"
-        >
-          <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-2xl">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              현재 학습 중인 기술
-            </h3>
-            <div className="flex flex-wrap justify-center gap-4">
-              <span className="px-4 py-2 bg-white rounded-full text-gray-700 font-medium shadow-sm">
-                Rust
-              </span>
-              <span className="px-4 py-2 bg-white rounded-full text-gray-700 font-medium shadow-sm">
-                WebAssembly
-              </span>
-              <span className="px-4 py-2 bg-white rounded-full text-gray-700 font-medium shadow-sm">
-                Machine Learning
-              </span>
-              <span className="px-4 py-2 bg-white rounded-full text-gray-700 font-medium shadow-sm">
-                Blockchain
-              </span>
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">추가 역량</h3>
+            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-3 rounded-full border border-blue-200">
+              <Star size={20} className="text-yellow-500" />
+              <span className="text-blue-700 font-medium">전문적인 개발 역량</span>
             </div>
+          </div>
+          
+          <div className="grid-responsive">
+            {additionalSkills.map((skill, index) => (
+              <motion.div
+                key={skill.name}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
+                className="skill-card text-center group hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 relative overflow-hidden"
+                whileHover={{ y: -8, scale: 1.02 }}
+              >
+                {/* Hover Effect Background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                {/* Level Badge */}
+                <div className="absolute top-4 right-4">
+                  <span className={`px-3 py-1 bg-gradient-to-r ${skill.color} text-white text-xs font-semibold rounded-full shadow-lg`}>
+                    {skill.level}
+                  </span>
+                </div>
+                
+                <div className={`w-20 h-20 bg-gradient-to-r ${skill.color} rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-xl`}>
+                  <skill.icon size={40} className="text-white" />
+                </div>
+                
+                <h4 className="text-xl font-bold text-gray-900 mb-3">{skill.name}</h4>
+                <p className="text-gray-600 mb-4">{skill.description}</p>
+                
+                {/* Decorative Corner */}
+                <div className="absolute top-0 right-0 w-0 h-0 border-l-[25px] border-l-transparent border-t-[25px] border-t-blue-500/20 rounded-bl-lg"></div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Currently Learning */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="mb-16"
+        >
+          <div className="text-center mb-8">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">현재 학습 중인 기술</h3>
+            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-50 to-blue-50 px-6 py-3 rounded-full border border-green-200">
+              <TrendingUp size={20} className="text-green-500" />
+              <span className="text-green-700 font-medium">새로운 기술 습득 중</span>
+            </div>
+          </div>
+          
+          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/50 shadow-xl">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {learningSkills.map((skill, index) => (
+                <motion.div
+                  key={skill.name}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.5, delay: 1.4 + index * 0.1 }}
+                  className="text-center group"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                >
+                  <div className={`w-16 h-16 bg-gradient-to-r ${skill.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                    <Rocket size={24} className="text-white" />
+                  </div>
+                  <div className="text-lg font-bold text-gray-900 mb-2">{skill.name}</div>
+                  <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={isInView ? { width: `${skill.progress}%` } : { width: 0 }}
+                      transition={{ duration: 1, delay: 1.6 + index * 0.1 }}
+                      className={`h-2 rounded-full bg-gradient-to-r ${skill.color} shadow-md`}
+                    />
+                  </div>
+                  <div className="text-sm text-gray-600 mt-2">{skill.progress}%</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Skills Achievement */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 1.6 }}
+          className="text-center"
+        >
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-8 border border-blue-200 shadow-xl">
+            <div className="flex items-center justify-center space-x-4 mb-4">
+              <Award size={32} className="text-blue-600" />
+              <CheckCircle size={32} className="text-green-600" />
+              <Star size={32} className="text-yellow-500" />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">기술 역량 인증</h3>
+            <p className="text-blue-700 font-medium text-lg">지속적인 기술 향상을 통해 최고의 솔루션을 제공합니다</p>
           </div>
         </motion.div>
       </div>
