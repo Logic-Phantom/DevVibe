@@ -334,15 +334,6 @@ const Skills = () => {
           transition={{ duration: 0.8, delay: 1.6 }}
           className="text-center"
         >
-          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-8 border border-blue-200 shadow-xl">
-            <div className="flex items-center justify-center space-x-4 mb-4">
-              <Award size={32} className="text-blue-600" />
-              <CheckCircle size={32} className="text-green-600" />
-              <Star size={32} className="text-yellow-500" />
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">기술 역량 인증</h3>
-            <p className="text-blue-700 font-medium text-lg">지속적인 기술 향상을 통해 최고의 솔루션을 제공합니다</p>
-          </div>
         </motion.div>
       </div>
     </section>
