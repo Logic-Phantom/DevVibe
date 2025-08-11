@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { User, Code, Lightbulb, Target, Award, Clock, FolderOpen, Heart, Star, TrendingUp, Rocket, Zap, CheckCircle, Sparkles, ArrowRight, Globe, Shield, Zap as ZapIcon, Figma, Brain, MessageCircle, Smartphone, FlaskRound } from 'lucide-react';
+import { Code, Lightbulb, Award, Clock, FolderOpen, Heart, TrendingUp, Rocket, Zap, CheckCircle, Sparkles, ArrowRight, Figma, Brain, Smartphone, FlaskRound } from 'lucide-react';
 
 const About = () => {
   const ref = useRef(null);
@@ -163,7 +163,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed"
           >
-            "조용히 코딩하고, 과감히 배포한다"는 모토로 지속적인 학습과 성장을 추구하는 개발자입니다.
+            &quot;조용히 코딩하고, 과감히 배포한다&quot;는 모토로 지속적인 학습과 성장을 추구하는 개발자입니다.
           </motion.p>
         </motion.div>
 

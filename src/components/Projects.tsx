@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Github, ExternalLink, Star, GitBranch, Calendar, Code, Eye, TrendingUp, Award, Sparkles, Zap, Clock, Users, Globe, ArrowRight } from 'lucide-react';
+import { Github, ExternalLink, Star, GitBranch, Code, Eye, TrendingUp, Award, Sparkles, Zap, Clock, Users, Globe, ArrowRight } from 'lucide-react';
 
 interface Repository {
   id: number;
@@ -115,7 +115,7 @@ const Projects = () => {
     }
   ];
 
-  const fetchRepositories = async () => {
+  const fetchRepositories = useCallback(async () => {
     try {
       const username = 'Logic-Phantom';
       const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=12`);
@@ -148,11 +148,11 @@ const Projects = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchRepositories();
-  }, []);
+  }, [fetchRepositories]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
