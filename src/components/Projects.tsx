@@ -43,75 +43,75 @@ const Projects = () => {
   const getSampleRepositories = (): Repository[] => [
     {
       id: 1,
-      name: 'DevVibe Portfolio',
-      description: 'Next.js와 Tailwind CSS를 사용한 현대적인 포트폴리오 웹사이트. 반응형 디자인과 애니메이션을 통해 사용자 경험을 향상시켰습니다.',
-      html_url: 'https://github.com/Logic-Phantom/DevVibe',
-      homepage: 'https://dev-vibe.vercel.app',
-      stargazers_count: 15,
-      forks_count: 8,
+      name: 'TechLog',
+      description: 'React 기반 기술 블로그. Gatsby를 활용하여 개발 여정을 기록하고 지식을 나누는 공간입니다.',
+      html_url: 'https://github.com/Logic-Phantom/Techlog',
+      homepage: null,
+      stargazers_count: 0,
+      forks_count: 0,
       language: 'TypeScript',
       updated_at: '2024-01-15T10:30:00Z',
-      topics: ['nextjs', 'typescript', 'tailwindcss', 'portfolio', 'responsive']
+      topics: ['react', 'gatsby', 'typescript', 'blog', 'portfolio']
     },
     {
       id: 2,
-      name: 'E-Commerce Platform',
-      description: 'React와 Node.js를 사용한 풀스택 이커머스 플랫폼. 결제 시스템, 사용자 관리, 상품 카탈로그 등 완전한 기능을 제공합니다.',
-      html_url: 'https://github.com/Logic-Phantom/ecommerce',
-      homepage: 'https://ecommerce-demo.vercel.app',
-      stargazers_count: 25,
-      forks_count: 12,
+      name: 'Converter-Figma',
+      description: 'Figma 디자인을 CLEOPATRA XML(.clx) + JavaScript 코드로 자동 변환하는 도구. 디자인과 개발의 간극을 줄이는 UI 자동화 툴입니다.',
+      html_url: 'https://github.com/Logic-Phantom/Converter-Figma',
+      homepage: null,
+      stargazers_count: 1,
+      forks_count: 0,
       language: 'JavaScript',
       updated_at: '2024-01-10T14:20:00Z',
-      topics: ['react', 'nodejs', 'mongodb', 'ecommerce', 'payment']
+      topics: ['figma', 'xml', 'javascript', 'automation', 'ui-tools']
     },
     {
       id: 3,
-      name: 'Task Management App',
-      description: 'React Native로 개발한 크로스 플랫폼 태스크 관리 애플리케이션. 실시간 동기화와 오프라인 지원을 제공합니다.',
-      html_url: 'https://github.com/Logic-Phantom/taskmanager',
+      name: 'UI-Detector',
+      description: '이미지 기반 UI 요소 탐지 및 분류를 수행하는 딥러닝 기반 프로젝트. YOLOv5 모델을 활용해 실제 업무 화면에서 버튼, 입력창, 텍스트 등을 자동 라벨링합니다.',
+      html_url: 'https://github.com/Logic-Phantom/UI-Detector',
       homepage: null,
-      stargazers_count: 18,
-      forks_count: 6,
-      language: 'JavaScript',
+      stargazers_count: 0,
+      forks_count: 0,
+      language: 'Python',
       updated_at: '2024-01-05T09:15:00Z',
-      topics: ['react-native', 'mobile', 'task-management', 'offline']
+      topics: ['python', 'yolov5', 'deep-learning', 'ui-detection', 'ai']
     },
     {
       id: 4,
-      name: 'API Gateway Service',
-      description: '마이크로서비스 아키텍처를 위한 API 게이트웨이. 인증, 로깅, 레이트 리미팅 등 고급 기능을 포함합니다.',
-      html_url: 'https://github.com/Logic-Phantom/api-gateway',
+      name: 'invitation',
+      description: '모바일 청첩장 웹 애플리케이션. 간편한 URL 공유와 반응형 디자인을 지원하며, 신랑·신부 정보, 날짜, 장소, 연락처, 계좌번호 등을 모던하고 심플한 UI로 제공합니다.',
+      html_url: 'https://github.com/Logic-Phantom/invitation',
       homepage: null,
-      stargazers_count: 12,
-      forks_count: 4,
-      language: 'Go',
+      stargazers_count: 0,
+      forks_count: 0,
+      language: 'TypeScript',
       updated_at: '2024-01-01T16:45:00Z',
-      topics: ['go', 'microservices', 'api-gateway', 'authentication']
+      topics: ['react', 'typescript', 'mobile', 'wedding', 'responsive']
     },
     {
       id: 5,
-      name: 'Data Visualization Dashboard',
-      description: 'D3.js와 React를 사용한 인터랙티브 데이터 시각화 대시보드. 실시간 데이터 업데이트와 다양한 차트 타입을 지원합니다.',
-      html_url: 'https://github.com/Logic-Phantom/data-viz',
-      homepage: 'https://data-viz-demo.vercel.app',
-      stargazers_count: 22,
-      forks_count: 9,
-      language: 'TypeScript',
+      name: 'ScriptSense',
+      description: '스크립트 자동리뷰 도구. Python 기반으로 코드 품질을 보장하고 자동화된 리뷰 프로세스를 제공합니다.',
+      html_url: 'https://github.com/Logic-Phantom/ScriptSense',
+      homepage: null,
+      stargazers_count: 0,
+      forks_count: 0,
+      language: 'Python',
       updated_at: '2023-12-28T11:20:00Z',
-      topics: ['d3js', 'react', 'typescript', 'data-visualization', 'dashboard']
+      topics: ['python', 'code-review', 'automation', 'quality', 'scripting']
     },
     {
       id: 6,
-      name: 'Chat Application',
-      description: 'Socket.io와 React를 사용한 실시간 채팅 애플리케이션. 그룹 채팅, 파일 공유, 이모지 지원 등 다양한 기능을 제공합니다.',
-      html_url: 'https://github.com/Logic-Phantom/chat-app',
-      homepage: 'https://chat-demo.vercel.app',
-      stargazers_count: 19,
-      forks_count: 7,
-      language: 'JavaScript',
+      name: 'EmotiBurn',
+      description: '감정과 스트레스를 시각적으로 해소하는 감성 기반 모바일 앱. Flutter로 개발되어 실제 불타는 연출을 통해 몰입감 있는 UX를 제공합니다.',
+      html_url: 'https://github.com/Logic-Phantom/EmotiBurn',
+      homepage: null,
+      stargazers_count: 0,
+      forks_count: 0,
+      language: 'Dart',
       updated_at: '2023-12-25T13:30:00Z',
-      topics: ['socketio', 'react', 'real-time', 'chat', 'file-sharing']
+      topics: ['flutter', 'dart', 'mobile', 'emotion', 'ux']
     }
   ];
 
@@ -170,16 +170,17 @@ const Projects = () => {
       'Rust': 'from-orange-500 to-orange-600',
       'PHP': 'from-purple-500 to-purple-600',
       'Ruby': 'from-red-500 to-red-600',
-      'Swift': 'from-orange-500 to-orange-600'
+      'Swift': 'from-orange-500 to-orange-600',
+      'Dart': 'from-blue-500 to-blue-600'
     };
     return colors[language || ''] || 'from-gray-500 to-gray-600';
   };
 
   const projectStats = [
-    { icon: Users, value: '100+', label: 'GitHub Followers', color: 'from-blue-500 to-blue-600' },
-    { icon: Star, value: '200+', label: 'Total Stars', color: 'from-yellow-500 to-yellow-600' },
-    { icon: GitBranch, value: '50+', label: 'Total Forks', color: 'from-green-500 to-green-600' },
-    { icon: Globe, value: '15+', label: 'Live Projects', color: 'from-purple-500 to-purple-600' }
+    { icon: Users, value: '0', label: 'GitHub Followers', color: 'from-blue-500 to-blue-600' },
+    { icon: Star, value: '1', label: 'Total Stars', color: 'from-yellow-500 to-yellow-600' },
+    { icon: GitBranch, value: '0', label: 'Total Forks', color: 'from-green-500 to-green-600' },
+    { icon: Globe, value: '6+', label: 'Projects', color: 'from-purple-500 to-purple-600' }
   ];
 
   if (loading) {

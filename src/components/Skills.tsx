@@ -15,11 +15,11 @@ const Skills = () => {
       icon: Globe,
       description: '사용자 인터페이스와 경험을 담당',
       skills: [
-        { name: 'React', level: 90, color: 'from-blue-500 to-blue-600', experience: '3년' },
-        { name: 'Next.js', level: 85, color: 'from-purple-500 to-purple-600', experience: '2년' },
-        { name: 'TypeScript', level: 80, color: 'from-indigo-500 to-indigo-600', experience: '2년' },
-        { name: 'Tailwind CSS', level: 90, color: 'from-cyan-500 to-cyan-600', experience: '3년' },
-        { name: 'HTML/CSS', level: 95, color: 'from-orange-500 to-orange-600', experience: '3년' }
+        { name: 'HTML/CSS', level: 85, color: 'from-orange-500 to-orange-600', experience: '3년' },
+        { name: 'JavaScript', level: 80, color: 'from-yellow-500 to-yellow-600', experience: '3년' },
+        { name: 'React', level: 40, color: 'from-blue-500 to-blue-600', experience: '1년 미만' },
+        { name: 'Next.js', level: 35, color: 'from-purple-500 to-purple-600', experience: '1년 미만' },
+        { name: 'TypeScript', level: 30, color: 'from-indigo-500 to-indigo-600', experience: '1년 미만' }
       ]
     },
     {
@@ -27,41 +27,39 @@ const Skills = () => {
       icon: Database,
       description: '서버 사이드 로직과 데이터 처리',
       skills: [
-        { name: 'Node.js', level: 85, color: 'from-green-500 to-green-600', experience: '2년' },
-        { name: 'Express.js', level: 80, color: 'from-emerald-500 to-emerald-600', experience: '2년' },
-        { name: 'Python', level: 75, color: 'from-blue-500 to-blue-600', experience: '1년' },
-        { name: 'Django', level: 70, color: 'from-green-500 to-green-600', experience: '1년' },
-        { name: 'PostgreSQL', level: 75, color: 'from-indigo-500 to-indigo-600', experience: '2년' }
+        { name: 'Java', level: 75, color: 'from-orange-500 to-orange-600', experience: '1년' },
+        { name: 'Spring Framework', level: 70, color: 'from-green-500 to-green-600', experience: '1년' },
+        { name: 'Spring Boot', level: 65, color: 'from-emerald-500 to-emerald-600', experience: '1년' },
+        { name: 'Python', level: 25, color: 'from-blue-500 to-blue-600', experience: '1년 미만' }
       ]
     },
     {
-      title: 'Mobile & Tools',
+      title: 'Tools & Others',
       icon: Smartphone,
-      description: '모바일 개발과 개발 도구',
+      description: '개발 도구와 기타 기술',
       skills: [
-        { name: 'React Native', level: 70, color: 'from-blue-500 to-blue-600', experience: '1년' },
-        { name: 'Git', level: 85, color: 'from-orange-500 to-orange-600', experience: '3년' },
-        { name: 'Docker', level: 65, color: 'from-blue-500 to-blue-600', experience: '1년' },
-        { name: 'AWS', level: 60, color: 'from-yellow-500 to-yellow-600', experience: '1년' },
-        { name: 'Figma', level: 75, color: 'from-purple-500 to-purple-600', experience: '2년' }
+        { name: 'Git', level: 80, color: 'from-orange-500 to-orange-600', experience: '3년' },
+        { name: 'SVN', level: 75, color: 'from-red-500 to-red-600', experience: '3년' },
+        { name: 'Figma', level: 70, color: 'from-purple-500 to-purple-600', experience: '2년' },
+        { name: 'Tailwind CSS', level: 30, color: 'from-cyan-500 to-cyan-600', experience: '1년 미만' }
       ]
     }
   ];
 
   const additionalSkills = [
-    { icon: Code2, name: 'RESTful APIs', description: 'API 설계 및 개발', color: 'from-blue-500 to-blue-600', level: 'Advanced' },
-    { icon: GitBranch, name: 'GraphQL', description: '데이터 쿼리 언어', color: 'from-purple-500 to-purple-600', level: 'Intermediate' },
-    { icon: Zap, name: 'Performance Optimization', description: '성능 최적화', color: 'from-yellow-500 to-yellow-600', level: 'Advanced' },
-    { icon: Shield, name: 'Security Best Practices', description: '보안 모범 사례', color: 'from-red-500 to-red-600', level: 'Intermediate' },
-    { icon: Cloud, name: 'CI/CD', description: '지속적 통합/배포', color: 'from-indigo-500 to-indigo-600', level: 'Intermediate' },
-    { icon: TrendingUp, name: 'Testing', description: '테스트 자동화', color: 'from-green-500 to-green-600', level: 'Advanced' }
+    { icon: Code2, name: 'RESTful APIs', description: 'API 설계 및 개발', color: 'from-blue-500 to-blue-600', level: 'Intermediate' },
+    { icon: GitBranch, name: 'Version Control', description: 'Git/SVN 형상관리', color: 'from-purple-500 to-purple-600', level: 'Advanced' },
+    { icon: Zap, name: 'Web Development', description: '웹 개발 및 배포', color: 'from-yellow-500 to-yellow-600', level: 'Advanced' },
+    { icon: Shield, name: 'Java Development', description: 'Spring 기반 백엔드', color: 'from-red-500 to-red-600', level: 'Intermediate' },
+    { icon: Cloud, name: 'CI/CD', description: '지속적 통합/배포', color: 'from-indigo-500 to-indigo-600', level: 'Beginner' },
+    { icon: TrendingUp, name: 'UI/UX Design', description: 'Figma 디자인', color: 'from-green-500 to-green-600', level: 'Intermediate' }
   ];
 
   const learningSkills = [
-    { name: 'Rust', color: 'from-orange-500 to-orange-600', progress: 30 },
-    { name: 'WebAssembly', color: 'from-purple-500 to-purple-600', progress: 25 },
-    { name: 'Machine Learning', color: 'from-blue-500 to-blue-600', progress: 20 },
-    { name: 'Blockchain', color: 'from-green-500 to-green-600', progress: 15 }
+    { name: 'AI/ML', color: 'from-purple-500 to-purple-600', progress: 40 },
+    { name: 'YOLO', color: 'from-blue-500 to-blue-600', progress: 35 },
+    { name: 'LM Studio', color: 'from-green-500 to-green-600', progress: 30 },
+    { name: 'Python', color: 'from-orange-500 to-orange-600', progress: 25 }
   ];
 
   const skillLevels = [
