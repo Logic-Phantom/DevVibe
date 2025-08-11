@@ -17,6 +17,8 @@ interface Repository {
   language: string | null;
   updated_at: string;
   topics: string[];
+  features?: string[];
+  tech?: string[];
 }
 
 interface GitHubRepo {
@@ -33,87 +35,159 @@ interface GitHubRepo {
   topics: string[];
 }
 
-const Projects = () => {
-  const [repositories, setRepositories] = useState<Repository[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+// Repositories to exclude from the visible list
+const EXCLUDE_REPOS = new Set([
+  'Tlog',
+  'Springboot_JPA',
+  'one-s-first-trip',
+  'Logic-Phantom.github.io',
+]);
 
-  const getSampleRepositories = (): Repository[] => [
+// Optional metadata to enrich specific repositories
+const repoMeta: Record<string, { homepage?: string; features?: string[]; tech?: string[]; description?: string }> = {
+  'TechLog': {
+    homepage: 'https://logic-phantom.github.io/',
+    features: ['정적 생성(Gatsby)', '콘텐츠 태깅/검색', '반응형 UI', 'PWA 지원'],
+    tech: ['React', 'TypeScript', 'Gatsby', 'GraphQL', 'GitHub Pages'],
+    description:
+      'React + Gatsby 기반 기술 블로그로 개발 학습과 기록을 정리합니다. 태그/검색, 반응형 UI, PWA를 지원하여 모바일에서도 앱처럼 사용할 수 있습니다.',
+  },
+  'invitation': {
+    homepage: 'https://invitation-dusky-psi.vercel.app/',
+    features: ['반응형 레이아웃', '갤러리', '일정/날씨 위젯', '공유하기', '계좌 보기 모달'],
+    tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Vercel'],
+    description:
+      '모바일 청첩장 웹 앱으로 갤러리, 일정/날씨, 공유하기, 계좌 보기 등 실사용 기능을 담고 있습니다. 반응형으로 다양한 기기에서 쾌적하게 동작합니다.',
+  },
+  'Converter-Figma': {
+    features: ['Figma → CLEOPATRA XML 변환', 'UI 코드 자동화', '디자인-개발 브릿지'],
+    tech: ['JavaScript', 'Node.js', 'Figma'],
+    description:
+      'Figma 디자인을 CLEOPATRA XML(.clx) + JavaScript 코드로 변환하여 디자인과 개발 간 반복 작업을 줄이는 자동화 도구입니다.',
+  },
+  'UI-Detector': {
+    features: ['YOLOv5 기반 객체 탐지', 'UI 요소 라벨링 자동화', '데이터셋 파이프라인'],
+    tech: ['Python', 'PyTorch', 'YOLOv5'],
+    description:
+      '이미지 기반으로 버튼/입력창/텍스트 등 UI 요소를 탐지·분류하는 딥러닝 프로젝트로, 실제 화면에서 자동 라벨링을 지원합니다.',
+  },
+  'ScriptSense': {
+    features: ['정적 분석', '자동 리뷰', '품질 리포트'],
+    tech: ['Python', 'CLI'],
+    description:
+      '스크립트 품질을 자동 점검하고 일관된 리뷰 프로세스를 제공하는 경량 자동리뷰 도구입니다.',
+  },
+  'EmotiBurn': {
+    features: ['감성 시각화', '불꽃 애니메이션', '몰입형 UX'],
+    tech: ['Flutter', 'Dart'],
+    description:
+      '감정과 스트레스를 시각적으로 해소하는 감성 기반 모바일 앱으로, 불꽃 연출을 통해 몰입감 있는 사용자 경험을 제공합니다.',
+  },
+};
+
+// Provide sample repositories upfront so it's available during initial state setup
+function getSampleRepositories(): Repository[] {
+  const samples: Repository[] = [
     {
       id: 1,
       name: 'TechLog',
-      description: 'React 기반 기술 블로그. Gatsby를 활용하여 개발 여정을 기록하고 지식을 나누는 공간입니다.',
+      description:
+        'React + Gatsby 기반 기술 블로그. 태그/검색과 반응형 UI를 통해 학습 기록을 쉽게 탐색할 수 있습니다. PWA를 지원하여 모바일에서도 앱처럼 사용 가능합니다.',
       html_url: 'https://github.com/Logic-Phantom/Techlog',
-      homepage: null,
+      homepage: repoMeta['TechLog'].homepage ?? null,
       stargazers_count: 0,
       forks_count: 0,
       language: 'TypeScript',
       updated_at: '2024-01-15T10:30:00Z',
-      topics: ['react', 'gatsby', 'typescript', 'blog', 'portfolio']
+      topics: ['react', 'gatsby', 'typescript', 'blog', 'portfolio'],
+      features: repoMeta['TechLog'].features,
+      tech: repoMeta['TechLog'].tech,
     },
     {
       id: 2,
       name: 'Converter-Figma',
-      description: 'Figma 디자인을 CLEOPATRA XML(.clx) + JavaScript 코드로 자동 변환하는 도구. 디자인과 개발의 간극을 줄이는 UI 자동화 툴입니다.',
+      description:
+        'Figma 디자인을 CLEOPATRA XML(.clx) + JavaScript 코드로 자동 변환하여 디자인-개발 간 반복 작업을 줄이는 UI 자동화 툴입니다.',
       html_url: 'https://github.com/Logic-Phantom/Converter-Figma',
       homepage: null,
       stargazers_count: 1,
       forks_count: 0,
       language: 'JavaScript',
       updated_at: '2024-01-10T14:20:00Z',
-      topics: ['figma', 'xml', 'javascript', 'automation', 'ui-tools']
+      topics: ['figma', 'xml', 'javascript', 'automation', 'ui-tools'],
+      features: repoMeta['Converter-Figma'].features,
+      tech: repoMeta['Converter-Figma'].tech,
     },
     {
       id: 3,
       name: 'UI-Detector',
-      description: '이미지 기반 UI 요소 탐지 및 분류를 수행하는 딥러닝 기반 프로젝트. YOLOv5 모델을 활용해 실제 업무 화면에서 버튼, 입력창, 텍스트 등을 자동 라벨링합니다.',
+      description:
+        '이미지 기반 UI 요소 탐지/분류 프로젝트로, YOLOv5 모델을 활용해 실제 화면에서 버튼·입력창·텍스트 등을 자동 라벨링합니다.',
       html_url: 'https://github.com/Logic-Phantom/UI-Detector',
       homepage: null,
       stargazers_count: 0,
       forks_count: 0,
       language: 'Python',
       updated_at: '2024-01-05T09:15:00Z',
-      topics: ['python', 'yolov5', 'deep-learning', 'ui-detection', 'ai']
+      topics: ['python', 'yolov5', 'deep-learning', 'ui-detection', 'ai'],
+      features: repoMeta['UI-Detector'].features,
+      tech: repoMeta['UI-Detector'].tech,
     },
     {
       id: 4,
       name: 'invitation',
-      description: '모바일 청첩장 웹 애플리케이션. 간편한 URL 공유와 반응형 디자인을 지원하며, 신랑·신부 정보, 날짜, 장소, 연락처, 계좌번호 등을 모던하고 심플한 UI로 제공합니다.',
+      description:
+        '모바일 청첩장 웹 앱으로, 신랑·신부 정보·일정·장소·연락처·계좌 등 필요한 정보를 모던한 UI로 제공합니다. 갤러리/일정/공유 등 실사용 기능 제공.',
       html_url: 'https://github.com/Logic-Phantom/invitation',
-      homepage: null,
+      homepage: repoMeta['invitation'].homepage ?? null,
       stargazers_count: 0,
       forks_count: 0,
       language: 'TypeScript',
       updated_at: '2024-01-01T16:45:00Z',
-      topics: ['react', 'typescript', 'mobile', 'wedding', 'responsive']
+      topics: ['react', 'typescript', 'mobile', 'wedding', 'responsive'],
+      features: repoMeta['invitation'].features,
+      tech: repoMeta['invitation'].tech,
     },
     {
       id: 5,
       name: 'ScriptSense',
-      description: '스크립트 자동리뷰 도구. Python 기반으로 코드 품질을 보장하고 자동화된 리뷰 프로세스를 제공합니다.',
+      description:
+        '스크립트 자동 리뷰/정적 분석 도구로, 일관된 품질 점검과 자동화된 리뷰 프로세스를 제공합니다.',
       html_url: 'https://github.com/Logic-Phantom/ScriptSense',
       homepage: null,
       stargazers_count: 0,
       forks_count: 0,
       language: 'Python',
       updated_at: '2023-12-28T11:20:00Z',
-      topics: ['python', 'code-review', 'automation', 'quality', 'scripting']
+      topics: ['python', 'code-review', 'automation', 'quality', 'scripting'],
+      features: repoMeta['ScriptSense'].features,
+      tech: repoMeta['ScriptSense'].tech,
     },
     {
       id: 6,
       name: 'EmotiBurn',
-      description: '감정과 스트레스를 시각적으로 해소하는 감성 기반 모바일 앱. Flutter로 개발되어 실제 불타는 연출을 통해 몰입감 있는 UX를 제공합니다.',
+      description:
+        '감성 기반 모바일 앱으로 스트레스/감정을 시각화하여 해소를 돕습니다. 불꽃 연출과 몰입형 UX를 제공합니다.',
       html_url: 'https://github.com/Logic-Phantom/EmotiBurn',
       homepage: null,
       stargazers_count: 0,
       forks_count: 0,
       language: 'Dart',
       updated_at: '2023-12-25T13:30:00Z',
-      topics: ['flutter', 'dart', 'mobile', 'emotion', 'ux']
+      topics: ['flutter', 'dart', 'mobile', 'emotion', 'ux'],
+      features: repoMeta['EmotiBurn'].features,
+      tech: repoMeta['EmotiBurn'].tech,
     }
   ];
+  return samples;
+}
+
+const Projects = () => {
+  const [repositories, setRepositories] = useState<Repository[]>(() => getSampleRepositories());
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const fetchRepositories = useCallback(async () => {
     try {
@@ -127,7 +201,7 @@ const Projects = () => {
       const data = await response.json();
 
       const filteredRepos = data
-        .filter((repo: GitHubRepo) => !repo.fork && repo.description)
+        .filter((repo: GitHubRepo) => !repo.fork && repo.description && !EXCLUDE_REPOS.has(repo.name))
         .map((repo: GitHubRepo) => ({
           id: repo.id,
           name: repo.name,
@@ -138,8 +212,19 @@ const Projects = () => {
           forks_count: repo.forks_count,
           language: repo.language,
           updated_at: repo.updated_at,
-          topics: repo.topics || []
-        }));
+          topics: repo.topics || [],
+        }))
+        .map((repo: Repository) => {
+          const meta = repoMeta[repo.name];
+          if (!meta) return { ...repo };
+          return {
+            ...repo,
+            homepage: (meta.homepage ?? repo.homepage) ?? null,
+            description: meta.description ?? repo.description,
+            features: meta.features ?? [],
+            tech: meta.tech ?? [],
+          } as Repository;
+        });
 
       setRepositories(filteredRepos.length > 0 ? filteredRepos : getSampleRepositories());
     } catch (err) {
@@ -183,22 +268,7 @@ const Projects = () => {
     { icon: Globe, value: '6+', label: 'Projects', color: 'from-purple-500 to-purple-600' }
   ];
 
-  if (loading) {
-    return (
-      <section id="projects" className="section-padding bg-white/50 backdrop-blur-sm">
-        <div className="container-custom">
-          <div className="text-center">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="inline-block w-20 h-20 border-4 border-blue-600 border-t-transparent rounded-full"
-            ></motion.div>
-            <p className="mt-8 text-gray-600 text-xl">프로젝트를 불러오는 중...</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  // Note: We keep rendering the section even while loading to avoid empty state flashes.
 
   return (
     <section id="projects" className="section-padding bg-white/50 backdrop-blur-sm relative overflow-hidden">
@@ -252,6 +322,16 @@ const Projects = () => {
       </div>
 
       <div className="container-custom relative z-10">
+        {loading && (
+          <div className="text-center mb-10">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              className="inline-block w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full"
+            />
+            <p className="mt-4 text-gray-600">프로젝트를 불러오는 중...</p>
+          </div>
+        )}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
@@ -266,7 +346,7 @@ const Projects = () => {
             className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-50 to-blue-50 px-6 py-3 rounded-full border border-purple-200 mb-6"
           >
             <Zap size={20} className="text-purple-600" />
-            <span className="text-purple-700 font-medium">Projects</span>
+            <span className="text-purple-700 font-medium">임채명의 프로젝트</span>
             <Zap size={20} className="text-purple-600" />
           </motion.div>
           
@@ -283,7 +363,7 @@ const Projects = () => {
             className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-3 rounded-full border border-blue-200 mt-6"
           >
             <Award size={20} className="text-blue-600" />
-            <span className="text-blue-700 font-medium">창의적이고 혁신적인 프로젝트</span>
+            <span className="text-blue-700 font-medium">임채명 · 창의적이고 혁신적인 프로젝트</span>
             <Sparkles size={20} className="text-purple-600" />
           </motion.div>
         </motion.div>
@@ -375,6 +455,30 @@ const Projects = () => {
               <p className="text-gray-600 mb-6 line-clamp-3 leading-relaxed text-lg">
                 {repo.description}
               </p>
+
+              {/* Features and Tech */}
+              {(repo.features?.length || repo.tech?.length) && (
+                <div className="mb-6 space-y-3">
+                  {repo.features && repo.features.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {repo.features.map((f, i) => (
+                        <span key={i} className="px-2.5 py-1 bg-blue-50 text-blue-700 text-xs rounded-full border border-blue-200">
+                          {f}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  {repo.tech && repo.tech.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {repo.tech.map((t, i) => (
+                        <span key={i} className="px-2.5 py-1 bg-purple-50 text-purple-700 text-xs rounded-full border border-purple-200">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* Project Stats */}
               <div className="flex items-center justify-between mb-6">

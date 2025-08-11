@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Github, Linkedin, Twitter, Mail, Phone, MapPin, Send, CheckCircle, MessageCircle, Users, Globe, ArrowRight, Clock, Award, Star } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageCircle, Send, ArrowRight, CheckCircle } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +16,7 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -27,34 +28,47 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
+    setErrorMsg(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.error || '전송 중 오류가 발생했습니다.');
+      }
+
+      setIsSubmitted(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 3000);
+
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 3000);
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
     {
       icon: Mail,
       title: 'Email',
-      value: 'your.email@example.com',
-      link: 'mailto:your.email@example.com',
+      value: 'dlacoaud92@naver.com',
+      link: 'mailto:dlacoaud92@naver.com',
       color: 'from-red-500 to-red-600',
       description: '가장 빠른 응답'
     },
     {
       icon: Phone,
       title: 'Phone',
-      value: '+82 10-1234-5678',
-      link: 'tel:+821012345678',
+      value: '010-2883-2999',
+      link: 'tel:+821028832999',
       color: 'from-green-500 to-green-600',
       description: '직접 통화 가능'
     },
@@ -68,41 +82,9 @@ const Contact = () => {
     }
   ];
 
-  const socialLinks = [
-    {
-      icon: Github,
-      name: 'GitHub',
-      url: 'https://github.com/Logic-Phantom',
-      color: 'hover:bg-gray-900 hover:text-white',
-      followers: '100+'
-    },
-    {
-      icon: Linkedin,
-      name: 'LinkedIn',
-      url: 'https://linkedin.com/in/yourprofile',
-      color: 'hover:bg-blue-600 hover:text-white',
-      followers: '500+'
-    },
-    {
-      icon: Twitter,
-      name: 'Twitter',
-      url: 'https://twitter.com/yourprofile',
-      color: 'hover:bg-blue-400 hover:text-white',
-      followers: '200+'
-    }
-  ];
+  // Social links removed
 
-  const contactStats = [
-    { icon: MessageCircle, value: '24/7', label: '응답 시간', color: 'from-blue-500 to-blue-600', description: '빠른 피드백' },
-    { icon: Users, value: '100+', label: '만족한 클라이언트', color: 'from-purple-500 to-purple-600', description: '높은 만족도' },
-    { icon: Globe, value: 'Worldwide', label: '서비스 지역', color: 'from-green-500 to-green-600', description: '글로벌 서비스' }
-  ];
-
-  const achievements = [
-    { icon: Award, text: '우수 개발자 인증', color: 'from-yellow-500 to-yellow-600' },
-    { icon: Star, text: '5년 연속 고객 만족', color: 'from-blue-500 to-blue-600' },
-    { icon: Clock, text: '평균 2시간 응답', color: 'from-green-500 to-green-600' }
-  ];
+  // Removed stats and achievements as requested
 
   return (
     <section id="contact" className="section-padding bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white relative overflow-hidden">
@@ -192,63 +174,11 @@ const Contact = () => {
             연락하기
           </h2>
           <p className="text-xl md:text-2xl text-blue-200 max-w-4xl mx-auto leading-relaxed">
-            프로젝트 협업이나 궁금한 점이 있으시다면 언제든 연락해 주세요. 빠른 시일 내에 답변 드리겠습니다.
+            프로젝트 협업이나 문의는 언제든 환영합니다. 임채명에게 아래 연락처로 연락주세요.
           </p>
         </motion.div>
 
-        {/* Contact Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
-        >
-          {contactStats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-              className="text-center p-8 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-300"
-              whileHover={{ y: -8, scale: 1.02 }}
-            >
-              <div className={`w-20 h-20 bg-gradient-to-r ${stat.color} rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl`}>
-                <stat.icon size={40} className="text-white" />
-              </div>
-              <div className="text-3xl font-bold text-white mb-3">{stat.value}</div>
-              <div className="text-xl text-blue-200 mb-2">{stat.label}</div>
-              <div className="text-blue-300 text-sm">{stat.description}</div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Achievements */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-20"
-        >
-          <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
-            <div className="flex flex-wrap justify-center gap-6">
-              {achievements.map((achievement, index) => (
-                <motion.div
-                  key={achievement.text}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                  className="flex items-center space-x-3 bg-white/10 px-6 py-4 rounded-2xl border border-white/20"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                >
-                  <div className={`w-10 h-10 bg-gradient-to-r ${achievement.color} rounded-full flex items-center justify-center`}>
-                    <achievement.icon size={20} className="text-white" />
-                  </div>
-                  <span className="text-white font-semibold">{achievement.text}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+        {/* Stats and achievements removed */}
 
         <div className="grid lg:grid-cols-2 gap-20">
           {/* Contact Information */}
@@ -298,44 +228,25 @@ const Contact = () => {
               ))}
             </div>
 
-            {/* Social Links */}
-            <div>
-              <h4 className="text-2xl font-semibold text-white mb-6">소셜 미디어</h4>
-              <div className="grid grid-cols-3 gap-4">
-                {socialLinks.map((social, index) => (
-                  <motion.a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
-                    className={`group p-6 bg-white/10 backdrop-blur-sm rounded-2xl flex flex-col items-center justify-center text-blue-200 border border-white/20 transition-all duration-300 hover:scale-105 ${social.color}`}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <social.icon size={32} className="mb-3" />
-                    <div className="text-center">
-                      <div className="font-semibold text-lg">{social.name}</div>
-                      <div className="text-sm opacity-80">{social.followers}</div>
-                    </div>
-                  </motion.a>
-                ))}
-              </div>
-            </div>
+            {/* Social links removed */}
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Contact Form (re-added with higher-contrast styling) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: 0.8 }}
             className="relative"
           >
-            <div className="glass-effect rounded-3xl p-10 border border-white/20 shadow-2xl">
+            <div className="rounded-3xl p-10 border border-white/15 shadow-2xl bg-black/30 backdrop-blur-md">
               <h3 className="text-3xl font-bold text-white mb-8">메시지 보내기</h3>
-              
+
+              {errorMsg && (
+                <div className="mb-6 rounded-xl border border-red-400/40 bg-red-500/10 text-red-200 px-4 py-3">
+                  {errorMsg}
+                </div>
+              )}
+
               {isSubmitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -362,7 +273,7 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                        className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500/70 focus:border-transparent transition-all duration-300"
                         placeholder="이름을 입력하세요"
                       />
                     </div>
@@ -377,12 +288,12 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                        className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500/70 focus:border-transparent transition-all duration-300"
                         placeholder="이메일을 입력하세요"
                       />
                     </div>
                   </div>
-                  
+
                   <div>
                     <label htmlFor="subject" className="block text-sm font-medium text-blue-200 mb-2">
                       제목 *
@@ -394,11 +305,11 @@ const Contact = () => {
                       value={formData.subject}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500/70 focus:border-transparent transition-all duration-300"
                       placeholder="제목을 입력하세요"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-blue-200 mb-2">
                       메시지 *
@@ -410,15 +321,15 @@ const Contact = () => {
                       onChange={handleInputChange}
                       required
                       rows={6}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
+                      className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500/70 focus:border-transparent transition-all duration-300 resize-none"
                       placeholder="메시지를 입력하세요"
                     />
                   </div>
-                  
+
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    className="group w-full px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3"
+                    className="group w-full px-8 py-4 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3"
                     whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -426,9 +337,9 @@ const Contact = () => {
                       <>
                         <motion.div
                           animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                           className="w-6 h-6 border-2 border-white border-t-transparent rounded-full"
-                        ></motion.div>
+                        />
                         <span>전송 중...</span>
                       </>
                     ) : (

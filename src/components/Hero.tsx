@@ -184,9 +184,7 @@ const Hero = () => {
             className="mb-8"
           >
             <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight">
-              <span className="gradient-text">안녕하세요,</span>
-              <br />
-              <span className="heading-gradient">개발자입니다</span>
+              <span className="gradient-text">안녕하세요, 임채명입니다</span>
             </h1>
             
             {/* Animated subtitle with typing effect */}
@@ -217,8 +215,8 @@ const Hero = () => {
           >
             {[
               { icon: Github, href: "https://github.com/Logic-Phantom", label: "GitHub", color: "hover:bg-gray-900 hover:text-white" },
-              { icon: Linkedin, href: "https://linkedin.com/in/yourprofile", label: "LinkedIn", color: "hover:bg-blue-600 hover:text-white" },
-              { icon: Mail, href: "mailto:your.email@example.com", label: "Email", color: "hover:bg-red-500 hover:text-white" }
+              { icon: Linkedin, href: "https://www.linkedin.com/in/%EC%B1%84%EB%AA%85-%EC%9E%84-a8b456379/", label: "LinkedIn", color: "hover:bg-blue-600 hover:text-white" },
+              { icon: Mail, href: "mailto:dlacoaud92@naver.com", label: "Email", color: "hover:bg-red-500 hover:text-white" }
             ].map((social, index) => (
               <motion.a
                 key={social.label}
