@@ -204,10 +204,7 @@ const Hero = () => {
                 <span className="text-purple-600 font-semibold">깔끔하고 효율적인 코드</span> 작성을 지향합니다.
               </span>
               <br className="hidden md:block" />
-              <span className="inline-block mt-2">
-                <span className="text-green-600 font-semibold">Forest_LIM</span>으로서{' '}
-                <span className="text-indigo-600 font-semibold">혁신적인 웹 솔루션</span>을 제공합니다.
-              </span>
+         
             </motion.div>
           </motion.div>
 
