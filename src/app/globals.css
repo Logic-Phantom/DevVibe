@@ -103,6 +103,62 @@
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
   }
+
+  /* 3D Effects */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  /* 3D Card Effect */
+  .card-3d {
+    @apply transition-all duration-300;
+    transform-style: preserve-3d;
+  }
+
+  .card-3d:hover {
+    transform: rotateY(10deg) rotateX(5deg) translateZ(20px);
+  }
+
+  /* 3D Text Effect */
+  .text-3d {
+    text-shadow: 
+      0 1px 0 #ccc,
+      0 2px 0 #c9c9c9,
+      0 3px 0 #bbb,
+      0 4px 0 #b9b9b9,
+      0 5px 0 #aaa,
+      0 6px 1px rgba(0,0,0,.1),
+      0 0 5px rgba(0,0,0,.1),
+      0 1px 3px rgba(0,0,0,.3),
+      0 3px 5px rgba(0,0,0,.2),
+      0 5px 10px rgba(0,0,0,.25),
+      0 10px 10px rgba(0,0,0,.2),
+      0 20px 20px rgba(0,0,0,.15);
+  }
+
+  /* Parallax Effect */
+  .parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  /* Mouse Trail Effect */
+  .mouse-trail {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+  }
 }
 
 @layer utilities {
@@ -131,5 +187,22 @@
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* 3D Transform Utilities */
+  .rotate-3d-x {
+    transform: rotateX(var(--rotate-x, 0deg));
+  }
+
+  .rotate-3d-y {
+    transform: rotateY(var(--rotate-y, 0deg));
+  }
+
+  .rotate-3d-z {
+    transform: rotateZ(var(--rotate-z, 0deg));
+  }
+
+  .translate-3d-z {
+    transform: translateZ(var(--translate-z, 0px));
   }
 }
