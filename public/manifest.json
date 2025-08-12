@@ -1,0 +1,79 @@
+{
+  "name": "Portfolio - Forest_LIM",
+  "short_name": "Forest_LIM",
+  "description": "Forest_LIM의 개발자 포트폴리오 웹사이트",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f9fafb",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ko",
+  "categories": ["productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/icon-192x192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshot-narrow.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "About",
+      "short_name": "About",
+      "description": "About Forest_LIM",
+      "url": "/#about",
+      "icons": [
+        {
+          "src": "/icon-192x192.svg",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "short_name": "Projects",
+      "description": "View Projects",
+      "url": "/#projects",
+      "icons": [
+        {
+          "src": "/icon-192x192.svg",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Contact Forest_LIM",
+      "url": "/#contact",
+      "icons": [
+        {
+          "src": "/icon-192x192.svg",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

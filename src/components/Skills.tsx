@@ -47,7 +47,6 @@ const Skills = () => {
   ];
 
   const additionalSkills = [
-    { icon: Code2, name: 'RESTful APIs', description: 'API 설계 및 개발', color: 'from-blue-500 to-blue-600', level: 'Intermediate' },
     { icon: GitBranch, name: 'Version Control', description: 'Git/SVN 형상관리', color: 'from-purple-500 to-purple-600', level: 'Advanced' },
     { icon: Zap, name: 'Web Development', description: '웹 개발 및 배포', color: 'from-yellow-500 to-yellow-600', level: 'Advanced' },
     { icon: Shield, name: 'Java Development', description: 'Spring 기반 백엔드', color: 'from-red-500 to-red-600', level: 'Intermediate' },

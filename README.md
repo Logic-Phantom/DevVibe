@@ -1,10 +1,11 @@
-# DevVibe Portfolio
+# Forest_LIM Portfolio
 
-현대적이고 세련된 개인 포트폴리오 웹사이트입니다. Next.js와 Tailwind CSS를 사용하여 구축되었으며, GitHub API를 통해 실제 프로젝트 정보를 동적으로 표시합니다.
+현대적이고 세련된 개인 포트폴리오 웹사이트입니다. Next.js와 Tailwind CSS를 사용하여 구축되었으며, PWA 기능을 지원하여 모바일에서도 앱처럼 사용할 수 있습니다. GitHub API를 통해 실제 프로젝트 정보를 동적으로 표시합니다.
 
 ## ✨ 주요 기능
 
 - **반응형 디자인**: 모든 디바이스에서 최적화된 사용자 경험
+- **PWA 지원**: Progressive Web App으로 설치 가능하고 오프라인 지원
 - **GitHub 연동**: 실제 GitHub 저장소 정보를 자동으로 가져와서 표시
 - **현대적 UI/UX**: Framer Motion을 활용한 부드러운 애니메이션
 - **SEO 최적화**: Next.js의 SSR/SSG 기능으로 검색 엔진 최적화
@@ -16,6 +17,7 @@
 - **Styling**: Tailwind CSS
 - **Animation**: Framer Motion
 - **Icons**: Lucide React
+- **PWA**: Service Worker, Web App Manifest
 - **Deployment**: Vercel (권장)
 
 ## 📁 프로젝트 구조
@@ -24,7 +26,7 @@
 portfolio/
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx          # 루트 레이아웃
+│   │   ├── layout.tsx          # 루트 레이아웃 (PWA 메타데이터 포함)
 │   │   ├── page.tsx            # 메인 페이지
 │   │   └── globals.css         # 전역 스타일
 │   └── components/
@@ -33,8 +35,15 @@ portfolio/
 │       ├── About.tsx           # 자기소개 섹션
 │       ├── Skills.tsx          # 기술 스택 섹션
 │       ├── Projects.tsx        # 프로젝트 섹션 (GitHub 연동)
-│       └── Contact.tsx         # 연락처 섹션
-├── public/                     # 정적 파일
+│       ├── Contact.tsx         # 연락처 섹션
+│       ├── Footer.tsx          # 푸터
+│       └── PWAInstallPrompt.tsx # PWA 설치 프롬프트
+├── public/
+│   ├── manifest.json           # PWA 매니페스트
+│   ├── sw.js                  # 서비스 워커
+│   ├── icon-192x192.png       # PWA 아이콘 (192x192)
+│   ├── icon-512x512.png       # PWA 아이콘 (512x512)
+│   └── apple-touch-icon.png   # Apple 터치 아이콘
 ├── package.json
 └── README.md
 ```
@@ -58,6 +67,19 @@ npm run dev
 ```
 
 브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 확인하세요.
+
+## 📱 PWA 기능
+
+### 설치 방법
+1. **Chrome/Edge**: 주소창 옆의 설치 아이콘 클릭
+2. **Safari**: 공유 버튼 → "홈 화면에 추가"
+3. **Android**: 브라우저 메뉴 → "홈 화면에 추가"
+
+### PWA 특징
+- **오프라인 지원**: 서비스 워커를 통한 캐싱
+- **앱처럼 사용**: 독립 실행 모드
+- **홈 화면 추가**: 모바일에서 빠른 접근
+- **푸시 알림**: 향후 구현 예정
 
 ## ⚙️ 설정 및 커스터마이징
 
@@ -149,6 +171,13 @@ CSS 클래스를 사용하여 그라디언트 텍스트 효과를 적용했습�
 <span className="gradient-text">텍스트</span>
 ```
 
+### PWA 설치 프롬프트
+사용자가 PWA를 설치할 수 있도록 도와주는 컴포넌트입니다:
+
+```typescript
+<PWAInstallPrompt />
+```
+
 ## 🔧 문제 해결
 
 ### GitHub API 제한
@@ -157,6 +186,13 @@ GitHub API는 시간당 60회 요청으로 제한됩니다. 이를 해결하려�
 1. GitHub Personal Access Token 생성
 2. 환경 변수로 설정
 3. API 요청 헤더에 토큰 추가
+
+### PWA 관련 문제
+PWA가 제대로 작동하지 않는 경우:
+
+1. HTTPS 환경에서 테스트 (로컬 개발 시 localhost는 허용)
+2. 브라우저 개발자 도구 → Application 탭에서 서비스 워커 확인
+3. 매니페스트 파일이 올바르게 로드되는지 확인
 
 ### 빌드 오류
 TypeScript 오류가 발생하는 경우:

@@ -78,7 +78,7 @@ const Header = () => {
                   : "0 10px 25px -3px rgba(59, 130, 246, 0.3)"
               }}
             >
-              <span className="relative z-10">DV</span>
+              <span className="relative z-10">PF</span>
               {/* Glow effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
             </motion.div>
@@ -86,7 +86,7 @@ const Header = () => {
               className="text-2xl font-black gradient-text hidden sm:block"
               animate={{ opacity: isScrolled ? 1 : 0.9 }}
             >
-              DevVibe
+              Forest_LIM
             </motion.span>
           </motion.div>
 
@@ -132,7 +132,7 @@ const Header = () => {
             whileTap={{ scale: 0.95 }}
             onClick={() => scrollToSection('contact')}
           >
-            <span>시작하기</span>
+            <span>연락하기</span>
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </motion.button>
 
@@ -200,7 +200,7 @@ const Header = () => {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <span>프로젝트 시작하기</span>
+                      <span>연락하기</span>
                       <ArrowRight size={18} />
                     </motion.button>
                   </motion.div>

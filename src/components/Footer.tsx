@@ -71,9 +71,9 @@ const Footer = () => {
             >
               <div className="flex items-center space-x-3 mb-6">
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                  DV
+                  PF
                 </div>
-                <span className="text-2xl font-bold gradient-text">DevVibe</span>
+                <span className="text-2xl font-bold gradient-text">Forest_LIM</span>
               </div>
             </motion.div>
 
@@ -100,7 +100,7 @@ const Footer = () => {
               viewport={{ once: true }}
               className="text-center lg:text-left"
             >
-              <p className="text-blue-200 text-sm">© {currentYear} DevVibe.</p>
+              <p className="text-blue-200 text-sm">© {currentYear} Forest_LIM.</p>
             </motion.div>
 
             {/* Social Links */}

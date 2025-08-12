@@ -203,6 +203,11 @@ const Hero = () => {
                 사용자 경험을 중시하며,{' '}
                 <span className="text-purple-600 font-semibold">깔끔하고 효율적인 코드</span> 작성을 지향합니다.
               </span>
+              <br className="hidden md:block" />
+              <span className="inline-block mt-2">
+                <span className="text-green-600 font-semibold">Forest_LIM</span>으로서{' '}
+                <span className="text-indigo-600 font-semibold">혁신적인 웹 솔루션</span>을 제공합니다.
+              </span>
             </motion.div>
           </motion.div>
 
@@ -221,8 +226,27 @@ const Hero = () => {
               <motion.a
                 key={social.label}
                 href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={social.label === 'Email' ? "_self" : "_blank"}
+                rel={social.label === 'Email' ? "noopener" : "noopener noreferrer"}
+                onClick={social.label === 'Email' ? (e) => {
+                  e.preventDefault();
+                  const email = 'dlacoaud92@naver.com';
+                  if (navigator.share) {
+                    navigator.share({
+                      title: 'Forest_LIM 포트폴리오',
+                      text: 'Forest_LIM에게 연락하기',
+                      url: `mailto:${email}`
+                    });
+                  } else {
+                    // Fallback: 클립보드에 복사
+                    navigator.clipboard.writeText(email).then(() => {
+                      alert('이메일 주소가 클립보드에 복사되었습니다: ' + email);
+                    }).catch(() => {
+                      // 클립보드 API가 지원되지 않는 경우
+                      window.open(`mailto:${email}`);
+                    });
+                  }
+                } : undefined}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
@@ -260,28 +284,6 @@ const Hero = () => {
             >
               <Download size={20} />
               <span>이력서 다운로드</span>
-            </motion.button>
-          </motion.div>
-
-          {/* Enhanced Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.5, delay: 2 }}
-            className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
-          >
-            <motion.button
-              onClick={scrollToAbout}
-              className="group p-4 bg-white/90 backdrop-blur-sm rounded-full border border-gray-200/50 hover:shadow-xl hover:bg-white transition-all duration-300"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <ChevronDown size={28} className="text-gray-600 group-hover:text-blue-600 transition-colors" />
-              </motion.div>
             </motion.button>
           </motion.div>
         </div>
