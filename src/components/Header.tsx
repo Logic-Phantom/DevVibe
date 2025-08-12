@@ -61,8 +61,8 @@ const Header = () => {
       }`}
     >
       <div className="container-custom">
-        <div className="flex items-center justify-between h-20 px-4">
-          {/* Enhanced Logo */}
+        <div className="flex items-center justify-between h-16 px-4">
+          {/* Logo */}
           <motion.div 
             className="flex items-center space-x-3 group cursor-pointer"
             onClick={() => scrollToSection('home')}
@@ -70,20 +70,13 @@ const Header = () => {
             whileTap={{ scale: 0.95 }}
           >
             <motion.div 
-              className="relative w-12 h-12 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 rounded-2xl flex items-center justify-center text-white font-black text-xl shadow-xl"
+              className="relative w-10 h-10 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-lg"
               whileHover={{ rotate: 5 }}
-              animate={{ 
-                boxShadow: isScrolled 
-                  ? "0 25px 50px -12px rgba(59, 130, 246, 0.25)" 
-                  : "0 10px 25px -3px rgba(59, 130, 246, 0.3)"
-              }}
             >
               <span className="relative z-10">PF</span>
-              {/* Glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
             </motion.div>
             <motion.span 
-              className="text-2xl font-black gradient-text hidden sm:block"
+              className="text-xl font-bold gradient-text"
               animate={{ opacity: isScrolled ? 1 : 0.9 }}
             >
               Forest_LIM
@@ -91,21 +84,21 @@ const Header = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-2">
+          <nav className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => (
               <motion.button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`relative px-6 py-3 rounded-xl font-semibold transition-all duration-300 group ${
+                className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 group ${
                   activeSection === item.id
-                    ? 'text-blue-600 bg-blue-50 shadow-lg'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50/50'
+                    ? 'text-blue-400 bg-gray-800 shadow-lg'
+                    : 'text-gray-300 hover:text-blue-400 hover:bg-gray-800/50'
                 }`}
-                whileHover={{ y: -2, scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ y: -1, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <div className="flex items-center space-x-2">
-                  <item.icon size={18} className="group-hover:scale-110 transition-transform duration-300" />
+                  <item.icon size={16} className="group-hover:scale-110 transition-transform duration-300" />
                   <span>{item.label}</span>
                 </div>
                 
@@ -113,41 +106,38 @@ const Header = () => {
                 {activeSection === item.id && (
                   <motion.div
                     layoutId="activeSection"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
                     initial={false}
                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
                   />
                 )}
-                
-                {/* Hover effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </motion.button>
             ))}
           </nav>
 
           {/* CTA Button */}
           <motion.button
-            className="hidden lg:flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
+            className="hidden lg:flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+            whileHover={{ scale: 1.02, y: -1 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => scrollToSection('contact')}
           >
             <span>연락하기</span>
-            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </motion.button>
 
           {/* Mobile Menu Button */}
           <motion.button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-3 rounded-xl hover:bg-gray-100 transition-colors duration-300"
+            className="lg:hidden p-2 rounded-lg hover:bg-gray-800 transition-colors duration-300"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={20} className="text-gray-300" /> : <Menu size={20} className="text-gray-300" />}
           </motion.button>
         </div>
 
-        {/* Enhanced Mobile Navigation */}
+        {/* Mobile Navigation */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -157,8 +147,8 @@ const Header = () => {
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="lg:hidden overflow-hidden"
             >
-              <div className="glass-effect mx-4 mb-4 rounded-2xl border border-white/20 p-6">
-                <nav className="space-y-3">
+              <div className="glass-effect mx-4 mb-4 rounded-xl border border-gray-700/50 p-4">
+                <nav className="space-y-2">
                   {navItems.map((item, index) => (
                     <motion.button
                       key={item.id}
@@ -166,20 +156,20 @@ const Header = () => {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: index * 0.1 }}
-                      className={`w-full flex items-center space-x-3 px-4 py-4 rounded-xl font-semibold transition-all duration-300 text-left ${
+                      className={`w-full flex items-center space-x-3 px-3 py-3 rounded-lg font-medium transition-all duration-300 text-left ${
                         activeSection === item.id
-                          ? 'text-blue-600 bg-blue-50 shadow-lg'
-                          : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50/50'
+                          ? 'text-blue-400 bg-gray-800 shadow-lg'
+                          : 'text-gray-300 hover:text-blue-400 hover:bg-gray-800/50'
                       }`}
                       whileHover={{ x: 5, scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <item.icon size={20} className="flex-shrink-0" />
+                      <item.icon size={18} className="flex-shrink-0" />
                       <span>{item.label}</span>
                       {activeSection === item.id && (
                         <motion.div
                           layoutId="mobileActiveSection"
-                          className="w-2 h-2 bg-blue-600 rounded-full ml-auto"
+                          className="w-2 h-2 bg-blue-400 rounded-full ml-auto"
                           initial={false}
                           transition={{ type: "spring", stiffness: 500, damping: 30 }}
                         />
@@ -192,16 +182,16 @@ const Header = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: 0.5 }}
-                    className="pt-4"
+                    className="pt-3"
                   >
                     <motion.button
                       onClick={() => scrollToSection('contact')}
-                      className="w-full flex items-center justify-center space-x-2 px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold shadow-lg"
+                      className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium shadow-lg"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
                       <span>연락하기</span>
-                      <ArrowRight size={18} />
+                      <ArrowRight size={16} />
                     </motion.button>
                   </motion.div>
                 </nav>

@@ -41,6 +41,7 @@ const EXCLUDE_REPOS = new Set([
   'Springboot_JPA',
   'one-s-first-trip',
   'Logic-Phantom.github.io',
+  'DevVibe',
 ]);
 
 // Optional metadata to enrich specific repositories
@@ -268,57 +269,11 @@ const Projects = () => {
     { icon: Globe, value: '6+', label: 'Projects', color: 'from-purple-500 to-purple-600' }
   ];
 
-  // Note: We keep rendering the section even while loading to avoid empty state flashes.
-
   return (
-    <section id="projects" className="section-padding bg-white/50 backdrop-blur-sm relative overflow-hidden">
-      {/* Enhanced Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{ 
-            x: [0, 80, 0],
-            y: [0, -60, 0],
-            scale: [1, 1.3, 1]
-          }}
-          transition={{ 
-            duration: 30, 
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute top-20 left-20 w-[500px] h-[500px] bg-gradient-to-r from-blue-100/25 to-indigo-100/25 rounded-full blur-3xl"
-        ></motion.div>
-        
-        <motion.div
-          animate={{ 
-            x: [0, -70, 0],
-            y: [0, 70, 0],
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ 
-            duration: 35, 
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 20
-          }}
-          className="absolute bottom-20 right-20 w-[600px] h-[600px] bg-gradient-to-r from-purple-100/20 to-pink-100/20 rounded-full blur-3xl"
-        ></motion.div>
-        
-        <motion.div
-          animate={{ 
-            scale: [1, 1.5, 1],
-            opacity: [0.15, 0.35, 0.15]
-          }}
-          transition={{ 
-            duration: 25, 
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 15
-          }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-100/10 to-purple-100/10 rounded-full blur-3xl"
-        ></motion.div>
-        
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:35px_35px]"></div>
+    <section id="projects" className="section-padding bg-gray-900 relative">
+      {/* Simple Background Pattern */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
       </div>
 
       <div className="container-custom relative z-10">
@@ -329,7 +284,7 @@ const Projects = () => {
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
               className="inline-block w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full"
             />
-            <p className="mt-4 text-gray-600">프로젝트를 불러오는 중...</p>
+            <p className="mt-4 text-gray-400">프로젝트를 불러오는 중...</p>
           </div>
         )}
         <motion.div
@@ -337,22 +292,22 @@ const Projects = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-50 to-blue-50 px-6 py-3 rounded-full border border-purple-200 mb-6"
+            className="inline-flex items-center space-x-2 bg-gray-800/50 px-6 py-3 rounded-full border border-gray-700/50 mb-6"
           >
-            <Zap size={20} className="text-purple-600" />
-            <span className="text-purple-700 font-medium">임채명의 프로젝트</span>
-            <Zap size={20} className="text-purple-600" />
+            <Zap size={20} className="text-purple-400" />
+            <span className="text-purple-300 font-medium">프로젝트</span>
+            <Zap size={20} className="text-purple-400" />
           </motion.div>
           
           <h2 className="section-title">프로젝트 포트폴리오</h2>
           <p className="section-subtitle">
-            GitHub에서 다양한 프로젝트를 확인할 수 있습니다. 각 프로젝트는 사용자 경험과 코드 품질을 중시하여 개발되었습니다.
+            GitHub에서 다양한 프로젝트를 확인할 수 있습니다.
           </p>
           
           {/* Projects Badge */}
@@ -360,11 +315,11 @@ const Projects = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-3 rounded-full border border-blue-200 mt-6"
+            className="inline-flex items-center space-x-2 bg-gray-800/50 px-6 py-3 rounded-full border border-gray-700/50 mt-6"
           >
-            <Award size={20} className="text-blue-600" />
-            <span className="text-blue-700 font-medium">임채명 · 창의적이고 혁신적인 프로젝트</span>
-            <Sparkles size={20} className="text-purple-600" />
+            <Award size={20} className="text-blue-400" />
+            <span className="text-blue-300 font-medium">프로젝트 개요</span>
+            <Sparkles size={20} className="text-purple-400" />
           </motion.div>
         </motion.div>
 
@@ -382,14 +337,14 @@ const Projects = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
-                whileHover={{ y: -5, scale: 1.02 }}
+                className="skill-card text-center"
+                whileHover={{ y: -4, scale: 1.02 }}
               >
-                <div className={`w-16 h-16 bg-gradient-to-r ${stat.color} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
-                  <stat.icon size={32} className="text-white" />
+                <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-lg flex items-center justify-center mx-auto mb-4`}>
+                  <stat.icon size={24} className="text-white" />
                 </div>
-                <div className="text-3xl font-bold gradient-text mb-2">{stat.value}</div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+                <div className="text-2xl font-bold gradient-text mb-2">{stat.value}</div>
+                <div className="text-gray-400 font-medium text-sm">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -399,9 +354,9 @@ const Projects = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-red-50 border border-red-200 rounded-2xl p-6 mb-8 text-center shadow-lg"
+            className="bg-red-900/50 border border-red-700/50 rounded-xl p-6 mb-8 text-center"
           >
-            <p className="text-red-600 font-medium">{error}</p>
+            <p className="text-red-400 font-medium">{error}</p>
           </motion.div>
         )}
 
@@ -412,16 +367,13 @@ const Projects = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
-              className="project-card group relative overflow-hidden"
-              whileHover={{ y: -8, scale: 1.02 }}
+              className="project-card group"
+              whileHover={{ y: -4, scale: 1.02 }}
             >
-              {/* Hover Effect Background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
               {/* Project Header */}
               <div className="flex items-start justify-between mb-6">
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
+                  <h3 className="text-xl font-bold text-gray-100 group-hover:text-blue-400 transition-colors mb-2">
                     {repo.name}
                   </h3>
                   <div className="flex items-center space-x-4">
@@ -429,22 +381,22 @@ const Projects = () => {
                       href={repo.html_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300"
+                      className="p-2 text-gray-400 hover:text-blue-400 hover:bg-gray-800/50 rounded-lg transition-all duration-300"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <Github size={20} />
+                      <Github size={18} />
                     </motion.a>
                     {repo.homepage && (
                       <motion.a
                         href={repo.homepage}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-lg transition-all duration-300"
+                        className="p-2 text-gray-400 hover:text-green-400 hover:bg-gray-800/50 rounded-lg transition-all duration-300"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                       >
-                        <ExternalLink size={20} />
+                        <ExternalLink size={18} />
                       </motion.a>
                     )}
                   </div>
@@ -452,7 +404,7 @@ const Projects = () => {
               </div>
 
               {/* Project Description */}
-              <p className="text-gray-600 mb-6 line-clamp-3 leading-relaxed text-lg">
+              <p className="text-gray-400 mb-6 line-clamp-3 leading-relaxed text-sm">
                 {repo.description}
               </p>
 
@@ -462,7 +414,7 @@ const Projects = () => {
                   {repo.features && repo.features.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {repo.features.map((f, i) => (
-                        <span key={i} className="px-2.5 py-1 bg-blue-50 text-blue-700 text-xs rounded-full border border-blue-200">
+                        <span key={i} className="px-2 py-1 bg-blue-900/50 text-blue-300 text-xs rounded-full border border-blue-700/50">
                           {f}
                         </span>
                       ))}
@@ -471,7 +423,7 @@ const Projects = () => {
                   {repo.tech && repo.tech.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {repo.tech.map((t, i) => (
-                        <span key={i} className="px-2.5 py-1 bg-purple-50 text-purple-700 text-xs rounded-full border border-purple-200">
+                        <span key={i} className="px-2 py-1 bg-purple-900/50 text-purple-300 text-xs rounded-full border border-purple-700/50">
                           {t}
                         </span>
                       ))}
@@ -483,17 +435,17 @@ const Projects = () => {
               {/* Project Stats */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4">
-                  <div className="flex items-center space-x-1 text-gray-600">
-                    <Star size={18} className="text-yellow-500" />
+                  <div className="flex items-center space-x-1 text-gray-400">
+                    <Star size={16} className="text-yellow-400" />
                     <span className="text-sm font-semibold">{repo.stargazers_count}</span>
                   </div>
-                  <div className="flex items-center space-x-1 text-gray-600">
-                    <GitBranch size={18} className="text-blue-500" />
+                  <div className="flex items-center space-x-1 text-gray-400">
+                    <GitBranch size={16} className="text-blue-400" />
                     <span className="text-sm font-semibold">{repo.forks_count}</span>
                   </div>
                 </div>
-                <div className="flex items-center space-x-1 text-gray-600">
-                  <Clock size={18} className="text-green-500" />
+                <div className="flex items-center space-x-1 text-gray-400">
+                  <Clock size={16} className="text-green-400" />
                   <span className="text-sm font-medium">{formatDate(repo.updated_at)}</span>
                 </div>
               </div>
@@ -502,8 +454,8 @@ const Projects = () => {
               <div className="space-y-4 mb-6">
                 {repo.language && (
                   <div className="flex items-center space-x-2">
-                    <Code size={18} className="text-gray-500" />
-                    <span className={`px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r ${getLanguageColor(repo.language)} text-white shadow-lg`}>
+                    <Code size={16} className="text-gray-500" />
+                    <span className={`px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r ${getLanguageColor(repo.language)} text-white`}>
                       {repo.language}
                     </span>
                   </div>
@@ -515,13 +467,13 @@ const Projects = () => {
                     {repo.topics.slice(0, 5).map((topic, topicIndex) => (
                       <span
                         key={topicIndex}
-                        className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full font-medium hover:bg-gray-200 transition-colors border border-gray-200"
+                        className="px-3 py-1 bg-gray-800/50 text-gray-300 text-xs rounded-full font-medium hover:bg-gray-700/50 transition-colors border border-gray-700/50"
                       >
                         {topic}
                       </span>
                     ))}
                     {repo.topics.length > 5 && (
-                      <span className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full font-medium border border-gray-200">
+                      <span className="px-3 py-1 bg-gray-800/50 text-gray-300 text-xs rounded-full font-medium border border-gray-700/50">
                         +{repo.topics.length - 5}
                       </span>
                     )}
@@ -535,18 +487,15 @@ const Projects = () => {
                   href={repo.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-lg"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="group inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <Eye size={18} />
+                  <Eye size={16} />
                   <span>프로젝트 보기</span>
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </motion.a>
               </div>
-              
-              {/* Decorative Corner */}
-              <div className="absolute top-0 right-0 w-0 h-0 border-l-[30px] border-l-transparent border-t-[30px] border-t-blue-500/20 rounded-bl-lg"></div>
             </motion.div>
           ))}
         </div>
@@ -556,20 +505,20 @@ const Projects = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-center mt-20"
+          className="text-center mt-16"
         >
           <motion.a
             href="https://github.com/Logic-Phantom"
             target="_blank"
             rel="noopener noreferrer"
-            className="group btn-secondary inline-flex items-center space-x-3 text-lg px-10 py-4"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
+            className="group btn-secondary inline-flex items-center space-x-3 px-8 py-3"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            <Github size={24} />
+            <Github size={20} />
             <span>더 많은 프로젝트 보기</span>
-            <TrendingUp size={24} />
-            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            <TrendingUp size={20} />
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </motion.a>
         </motion.div>
       </div>
