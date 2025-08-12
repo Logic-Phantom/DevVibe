@@ -2,10 +2,23 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Info, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { Info, CheckCircle, XCircle } from 'lucide-react';
+
+// PWA 관련 타입 정의
+interface NavigatorWithStandalone extends Navigator {
+  standalone?: boolean;
+}
+
+interface PWAStatus {
+  hasManifest: boolean;
+  hasServiceWorker: boolean;
+  isInstalled: boolean;
+  canInstall: boolean;
+  serviceWorkerRegistered: boolean;
+}
 
 const PWADebug = () => {
-  const [pwaStatus, setPwaStatus] = useState({
+  const [pwaStatus, setPwaStatus] = useState<PWAStatus>({
     hasManifest: false,
     hasServiceWorker: false,
     isInstalled: false,
@@ -15,11 +28,11 @@ const PWADebug = () => {
 
   useEffect(() => {
     const checkPWAStatus = () => {
-      const status = {
+      const status: PWAStatus = {
         hasManifest: !!document.querySelector('link[rel="manifest"]'),
         hasServiceWorker: 'serviceWorker' in navigator,
         isInstalled: window.matchMedia('(display-mode: standalone)').matches || 
-                    (window.navigator as any).standalone === true,
+                    (window.navigator as NavigatorWithStandalone).standalone === true,
         canInstall: false,
         serviceWorkerRegistered: false
       };

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, ChevronDown, Sparkles, Zap, Code2, Download, ArrowRight } from 'lucide-react';
+import { Github, Linkedin, Mail, Sparkles, Zap, Code2, Download, ArrowRight } from 'lucide-react';
 
 const Hero = () => {
   const scrollToAbout = () => {
