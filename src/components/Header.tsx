@@ -15,17 +15,33 @@ const Header = () => {
       
       // Update active section based on scroll position
       const sections = ['home', 'about', 'skills', 'projects', 'contact'];
-      const current = sections.find(section => {
+      const scrollPosition = window.scrollY + 200; // Increased offset for better detection
+      
+      let currentSection = 'home';
+      
+      // Check each section from top to bottom
+      for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
         const element = document.getElementById(section);
         if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
+          const offsetTop = element.offsetTop;
+          const offsetBottom = offsetTop + element.offsetHeight;
+          
+          // If scroll position is within this section's bounds
+          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+            currentSection = section;
+            break;
+          }
         }
-        return false;
-      });
-      if (current) {
-        setActiveSection(current);
       }
+      
+      // If we're past the last section, set to contact
+      const lastSection = document.getElementById('contact');
+      if (lastSection && scrollPosition >= lastSection.offsetTop) {
+        currentSection = 'contact';
+      }
+      
+      setActiveSection(currentSection);
     };
 
     window.addEventListener('scroll', handleScroll);
