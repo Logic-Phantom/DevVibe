@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Code, Lightbulb, Award, Clock, FolderOpen, Heart, TrendingUp, Rocket, Zap, CheckCircle, Sparkles, ArrowRight, Figma, Brain, Smartphone, FlaskRound } from 'lucide-react';
+import { Code, Lightbulb, Award, Clock, FolderOpen, Heart, TrendingUp, Rocket, Zap, CheckCircle, Sparkles, Figma, Brain, Smartphone, FlaskRound } from 'lucide-react';
 
 const About = () => {
   const ref = useRef(null);
@@ -71,12 +71,6 @@ const About = () => {
     }
   ];
 
-  const achievements = [
-    { icon: Rocket, text: '웹 개발', gradient: 'from-blue-500 to-cyan-500' },
-    { icon: Zap, text: 'Java/Spring', gradient: 'from-purple-500 to-pink-500' },
-    { icon: CheckCircle, text: 'Git/SVN', gradient: 'from-emerald-500 to-teal-500' }
-  ];
-
   return (
     <section id="about" className="section-padding relative bg-gray-900">
       {/* Simple Background Pattern */}
@@ -120,7 +114,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="section-subtitle"
           >
-            "조용히 코딩하고, 과감히 배포한다"는 모토로 지속적인 학습과 성장을 추구하는 개발자입니다.
+            &ldquo;조용히 코딩하고, 과감히 배포한다&rdquo;는 모토로 지속적인 학습과 성장을 추구하는 개발자입니다.
           </motion.p>
         </motion.div>
 
