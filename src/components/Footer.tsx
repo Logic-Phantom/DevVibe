@@ -10,15 +10,11 @@ const Footer = () => {
 
   const currentYear = new Date().getFullYear();
 
-  const footerLinks: { title: string; links: { name: string; href: string }[] }[] = [];
-
   const socialLinks = [
     { icon: Github, href: 'https://github.com/Logic-Phantom', label: 'GitHub', color: 'hover:bg-gray-900 hover:text-white' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/%EC%B1%84%EB%AA%85-%EC%9E%84-a8b456379/', label: 'LinkedIn', color: 'hover:bg-blue-600 hover:text-white' },
     { icon: Mail, href: 'mailto:dlacoaud92@naver.com', label: 'Email', color: 'hover:bg-red-500 hover:text-white' }
   ];
-
-  // Achievements removed as requested
 
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white relative overflow-hidden">
@@ -147,9 +143,6 @@ const Footer = () => {
       >
         <ArrowUp size={24} className="mx-auto group-hover:-translate-y-1 transition-transform duration-300" />
       </motion.button>
-
-      {/* Floating Elements */}
-      {/* Floating decorative icons removed to avoid unused references */}
     </footer>
   );
 };

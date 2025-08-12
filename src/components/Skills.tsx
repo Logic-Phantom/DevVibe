@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Globe, Database, Smartphone, Code2, GitBranch, Zap, Shield, Cloud, TrendingUp, Star, Award, Target, CheckCircle, Rocket } from 'lucide-react';
+import { Globe, Database, Smartphone, GitBranch, Zap, Shield, Cloud, TrendingUp, Star, Target, Rocket } from 'lucide-react';
 
 const Skills = () => {
   const ref = useRef(null);
