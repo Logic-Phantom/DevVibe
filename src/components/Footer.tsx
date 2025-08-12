@@ -2,8 +2,21 @@
 
 import { motion } from 'framer-motion';
 import { Github, Linkedin, ArrowUp } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const Footer = () => {
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setShowScrollButton(scrollTop > 300); // 300px 이상 스크롤했을 때만 버튼 표시
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -97,18 +110,20 @@ const Footer = () => {
       </div>
 
       {/* Scroll to Top Button */}
-      <motion.button
-        onClick={scrollToTop}
-        initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 1.2 }}
-        viewport={{ once: true }}
-        className="fixed bottom-6 right-6 w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-lg hover:shadow-blue-500/25 transition-all duration-300 z-50 group"
-        whileHover={{ scale: 1.05, y: -1 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <ArrowUp size={20} className="mx-auto group-hover:-translate-y-1 transition-transform duration-300" />
-      </motion.button>
+      {showScrollButton && (
+        <motion.button
+          onClick={scrollToTop}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
+          transition={{ duration: 0.3 }}
+          className="fixed bottom-6 right-6 w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-lg hover:shadow-blue-500/25 transition-all duration-300 z-50 group"
+          whileHover={{ scale: 1.05, y: -1 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <ArrowUp size={20} className="mx-auto group-hover:-translate-y-1 transition-transform duration-300" />
+        </motion.button>
+      )}
     </footer>
   );
 };

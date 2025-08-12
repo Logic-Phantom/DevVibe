@@ -59,14 +59,22 @@ export default function RootLayout({
                   navigator.serviceWorker.register('/sw.js')
                     .then(function(registration) {
                       console.log('SW registered: ', registration);
-                      
-                      // Check for updates
+
+                      // If there's an updated SW waiting, tell it to activate immediately
+                      if (registration.waiting) {
+                        registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+                      }
+
+                      // Listen for updates
                       registration.addEventListener('updatefound', () => {
                         const newWorker = registration.installing;
                         if (newWorker) {
                           newWorker.addEventListener('statechange', () => {
                             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                              console.log('New content is available; please refresh.');
+                              console.log('New content is available; reloading to activate new SW.');
+                              registration.waiting && registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+                              // Reload to ensure fresh assets
+                              window.location.reload();
                             }
                           });
                         }
@@ -77,7 +85,7 @@ export default function RootLayout({
                     });
                 });
               }
-              
+
               // PWA install prompt handling
               let deferredPrompt;
               window.addEventListener('beforeinstallprompt', (e) => {
