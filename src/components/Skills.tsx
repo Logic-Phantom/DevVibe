@@ -81,7 +81,7 @@ const Skills = () => {
           
           <h2 className="section-title">기술 스택</h2>
           <p className="section-subtitle">
-            다양한 기술 스택을 활용하여 효율적이고 확장 가능한 솔루션을 개발합니다.
+            다양한 기술 스택을 활용하여 효율적으로 개발합니다.
           </p>
         </motion.div>
 

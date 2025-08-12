@@ -65,14 +65,6 @@ const Contact = () => {
       description: '가장 빠른 응답'
     },
     {
-      icon: Phone,
-      title: 'Phone',
-      value: '010-2883-2999',
-      link: 'tel:+821028832999',
-      color: 'from-green-500 to-green-600',
-      description: '직접 통화 가능'
-    },
-    {
       icon: MapPin,
       title: 'Location',
       value: 'Seoul, South Korea',
@@ -122,7 +114,7 @@ const Contact = () => {
               연락처 정보
             </h3>
             <p className="text-gray-400 mb-8 leading-relaxed">
-              다양한 채널을 통해 연락할 수 있습니다. 이메일이나 전화로 연락하시면 가장 빠르게 응답할 수 있습니다.
+              다양한 채널을 통해 연락할 수 있습니다. 이메일로 연락하시면 가장 빠르게 응답할 수 있습니다.
             </p>
 
             {/* Contact Details */}
