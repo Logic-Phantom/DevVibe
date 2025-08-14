@@ -18,6 +18,9 @@ interface NavigatorWithStandalone extends Navigator {
 }
 
 const PWAInstallPrompt = () => {
+  // Disable PWA install prompt - return null immediately
+  return null;
+
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showPrompt, setShowPrompt] = useState(false);
   const [isInstalled, setIsInstalled] = useState(false);

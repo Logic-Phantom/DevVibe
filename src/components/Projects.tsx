@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Github, ExternalLink, Star, GitBranch, Code, Eye, TrendingUp, Award, Sparkles, Zap, Clock, Users, Globe, ArrowRight } from 'lucide-react';
+import { Github, ExternalLink, Star, GitBranch, Code, Eye, TrendingUp, Award, Sparkles, Zap, Clock, Users, Globe, ArrowRight, Heart } from 'lucide-react';
 
 interface Repository {
   id: number;
@@ -375,10 +375,22 @@ const Projects = () => {
                           className="p-2 bg-gray-800/50 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700/50 transition-all duration-300"
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
+                          title="라이브 사이트 방문"
                         >
-                          <ExternalLink size={16} />
+                          <Globe size={16} />
                         </motion.a>
                       )}
+                      <motion.a
+                        href={repo.html_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 bg-gray-800/50 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700/50 transition-all duration-300"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        title="GitHub 저장소"
+                      >
+                        <Github size={16} />
+                      </motion.a>
                     </div>
                   </div>
                 </div>
@@ -443,18 +455,18 @@ const Projects = () => {
                   )}
                 </div>
 
-                {/* View Project Button */}
+                {/* Project Action Button */}
                 <div className="mt-6">
                   <motion.a
                     href={repo.html_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                    className="group w-full inline-flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <Eye size={16} />
-                    <span>프로젝트 보기</span>
+                    <Github size={16} />
+                    <span>GitHub 저장소</span>
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </motion.a>
                 </div>
@@ -463,11 +475,133 @@ const Projects = () => {
           ))}
         </div>
 
+        {/* Live Demo Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-20 mb-16"
+        >
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="inline-flex items-center space-x-2 bg-gray-800/50 px-6 py-3 rounded-full border border-gray-700/50 mb-6"
+            >
+              <Globe size={20} className="text-green-400" />
+              <span className="text-green-300 font-medium">라이브 데모</span>
+              <Globe size={20} className="text-green-400" />
+            </motion.div>
+            
+            <h3 className="text-3xl font-bold text-white mb-4">실제 배포된 프로젝트</h3>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              실제로 서비스되고 있는 프로젝트들을 직접 체험해보세요.
+            </p>
+          </div>
+
+          {/* Live Demo Grid */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* TechLog Blog */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="group"
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              <div className="bg-gray-800/30 backdrop-blur-xl border border-gray-700/50 rounded-2xl p-8 h-full hover:bg-gray-800/50 transition-all duration-300">
+                <div className="flex items-center space-x-4 mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                    <Code size={28} className="text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-white mb-1">TechLog</h4>
+                    <p className="text-gray-400 text-sm">개인 기술 블로그</p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-300 mb-6 leading-relaxed">
+                  React + Gatsby 기반 기술 블로그로 개발 학습과 기록을 정리합니다. 
+                  태그/검색, 반응형 UI, PWA를 지원하여 모바일에서도 앱처럼 사용할 수 있습니다.
+                </p>
+                
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="px-3 py-1 bg-blue-900/50 text-blue-300 text-xs rounded-full border border-blue-700/50">React</span>
+                  <span className="px-3 py-1 bg-blue-900/50 text-blue-300 text-xs rounded-full border border-blue-700/50">Gatsby</span>
+                  <span className="px-3 py-1 bg-blue-900/50 text-blue-300 text-xs rounded-full border border-blue-700/50">TypeScript</span>
+                  <span className="px-3 py-1 bg-purple-900/50 text-purple-300 text-xs rounded-full border border-purple-700/50">PWA</span>
+                </div>
+                
+                <motion.a
+                  href="https://logic-phantom.github.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg font-medium hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Globe size={16} />
+                  <span>사이트 방문</span>
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </motion.a>
+              </div>
+            </motion.div>
+
+            {/* Invitation Wedding */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+              className="group"
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              <div className="bg-gray-800/30 backdrop-blur-xl border border-gray-700/50 rounded-2xl p-8 h-full hover:bg-gray-800/50 transition-all duration-300">
+                <div className="flex items-center space-x-4 mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-600 rounded-xl flex items-center justify-center">
+                    <Heart size={28} className="text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-white mb-1">Wedding Invitation</h4>
+                    <p className="text-gray-400 text-sm">모바일 청첩장</p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-300 mb-6 leading-relaxed">
+                  모바일 청첩장 웹 앱으로 갤러리, 일정/날씨, 공유하기, 계좌 보기 등 
+                  실사용 기능을 담고 있습니다. 반응형으로 다양한 기기에서 쾌적하게 동작합니다.
+                </p>
+                
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="px-3 py-1 bg-blue-900/50 text-blue-300 text-xs rounded-full border border-blue-700/50">Next.js</span>
+                  <span className="px-3 py-1 bg-blue-900/50 text-blue-300 text-xs rounded-full border border-blue-700/50">React</span>
+                  <span className="px-3 py-1 bg-blue-900/50 text-blue-300 text-xs rounded-full border border-blue-700/50">TypeScript</span>
+                  <span className="px-3 py-1 bg-purple-900/50 text-purple-300 text-xs rounded-full border border-purple-700/50">Vercel</span>
+                </div>
+                
+                <motion.a
+                  href="https://invitation-dusky-psi.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-600 text-white rounded-lg font-medium hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Globe size={16} />
+                  <span>사이트 방문</span>
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </motion.a>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
         {/* View More Projects */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 1.0 }}
           className="text-center mt-16"
         >
           <motion.a
