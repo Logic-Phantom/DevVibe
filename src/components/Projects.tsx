@@ -198,73 +198,9 @@ function getSampleRepositories(): Repository[] {
 }
 
 const Projects = () => {
-  const [repositories, setRepositories] = useState<Repository[]>(getSampleRepositories());
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [repositories] = useState<Repository[]>(getSampleRepositories());
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const fetchGitHubRepos = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const response = await fetch('https://api.github.com/users/Logic-Phantom/repos?sort=updated&per_page=100');
-      
-      if (!response.ok) {
-        throw new Error(`GitHub API error: ${response.status}`);
-      }
-
-      const repos: GitHubRepo[] = await response.json();
-      
-      // Filter and transform repositories
-      const filteredRepos = repos
-        .filter(repo => !EXCLUDE_REPOS.has(repo.name))
-        .filter(repo => !repo.fork)
-        .slice(0, 6)
-        .map(repo => {
-          const meta = repoMeta[repo.name] || {};
-          return {
-            id: repo.id,
-            name: repo.name,
-            description: meta.description || repo.description || '프로젝트 설명이 없습니다.',
-            html_url: repo.html_url,
-            homepage: meta.homepage || repo.homepage,
-            stargazers_count: repo.stargazers_count,
-            forks_count: repo.forks_count,
-            language: repo.language,
-            updated_at: repo.updated_at,
-            topics: repo.topics || [],
-            features: meta.features,
-            tech: meta.tech,
-          } as Repository;
-        });
-
-      setRepositories(filteredRepos);
-    } catch (err) {
-      console.error('Error fetching GitHub repositories:', err);
-      setError(err instanceof Error ? err.message : '프로젝트를 불러오는 중 오류가 발생했습니다.');
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchGitHubRepos();
-  }, [fetchGitHubRepos]);
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffTime = Math.abs(now.getTime() - date.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
-    if (diffDays === 1) return '오늘';
-    if (diffDays <= 7) return `${diffDays}일 전`;
-    if (diffDays <= 30) return `${Math.floor(diffDays / 7)}주 전`;
-    if (diffDays <= 365) return `${Math.floor(diffDays / 30)}개월 전`;
-    return `${Math.floor(diffDays / 365)}년 전`;
-  };
 
   const getLanguageColor = (language: string | null) => {
     const colors: Record<string, string> = {
@@ -291,16 +227,6 @@ const Projects = () => {
       </div>
 
       <div className="container-custom relative z-10">
-        {loading && (
-          <div className="text-center mb-10">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="inline-block w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full"
-            />
-            <p className="mt-4 text-gray-400">프로젝트를 불러오는 중...</p>
-          </div>
-        )}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
@@ -336,17 +262,6 @@ const Projects = () => {
             <Sparkles size={20} className="text-purple-400" />
           </motion.div>
         </motion.div>
-
-        {error && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-red-900/20 border border-red-700/50 rounded-lg p-6 mb-8 text-center"
-          >
-            <p className="text-red-400 mb-2">프로젝트를 불러오는 중 오류가 발생했습니다.</p>
-            <p className="text-gray-400 text-sm">{error}</p>
-          </motion.div>
-        )}
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
