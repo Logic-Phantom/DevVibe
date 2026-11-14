@@ -1,15 +1,18 @@
 {
-  "name": "Forest_LIM",
-  "short_name": "Forest_LIM",
-  "description": "Forest_LIM의 개발자 포트폴리오 웹사이트",
+  "name": "임채명 포트폴리오",
+  "short_name": "임채명",
+  "description": "풀스택 개발자 임채명(Forest_LIM)의 포트폴리오",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f9fafb",
-  "theme_color": "#3b82f6",
+  "background_color": "#0b0d10",
+  "theme_color": "#0b0d10",
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "ko",
-  "categories": ["productivity", "utilities"],
+  "categories": [
+    "productivity",
+    "utilities"
+  ],
   "icons": [
     {
       "src": "/icon-192x192.svg",
@@ -24,56 +27,16 @@
       "purpose": "any maskable"
     }
   ],
-  "screenshots": [
-    {
-      "src": "/screenshot-wide.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide"
-    },
-    {
-      "src": "/screenshot-narrow.png",
-      "sizes": "750x1334",
-      "type": "image/png",
-      "form_factor": "narrow"
-    }
-  ],
   "shortcuts": [
     {
-      "name": "About",
-      "short_name": "About",
-      "description": "About Forest_LIM",
-      "url": "/#about",
-      "icons": [
-        {
-          "src": "/icon-192x192.svg",
-          "sizes": "192x192"
-        }
-      ]
+      "name": "작업",
+      "short_name": "작업",
+      "url": "/#work"
     },
     {
-      "name": "Projects",
-      "short_name": "Projects",
-      "description": "View Projects",
-      "url": "/#projects",
-      "icons": [
-        {
-          "src": "/icon-192x192.svg",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
-      "name": "Contact",
-      "short_name": "Contact",
-      "description": "Contact Forest_LIM",
-      "url": "/#contact",
-      "icons": [
-        {
-          "src": "/icon-192x192.svg",
-          "sizes": "192x192"
-        }
-      ]
+      "name": "연락",
+      "short_name": "연락",
+      "url": "/#contact"
     }
   ]
 }

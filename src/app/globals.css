@@ -2,328 +2,130 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 색은 여기서만 정합니다. 강조색(accent)은 주 버튼과 링크에만 씁니다. */
+:root {
+  --bg: #0b0d10;
+  --surface: #12151a;
+  --line: #23272e;
+  --line-strong: #343a43;
+  --ink: #e9ebee;
+  --muted: #949ba5;
+  --faint: #626a75;
+  --accent: #5ab9fc;
+  --accent-ink: #04121e;
+  --ok: #6fcf97;
+  --wait: #e5b567;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+    background: var(--bg);
   }
-  
+
   body {
-    @apply antialiased bg-gray-900 text-gray-100;
-    cursor: none; /* Hide default cursor */
+    @apply antialiased;
+    background: var(--bg);
+    color: var(--ink);
+    font-feature-settings: 'ss01', 'tnum';
+    word-break: keep-all;
   }
 
-  /* Show default cursor on interactive elements */
-  a, button, input, textarea, select {
-    cursor: pointer;
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
   }
 
-  /* Hide custom cursor on interactive elements */
-  a:hover, button:hover, input:hover, textarea:hover, select:hover {
-    cursor: pointer;
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
 }
 
 @layer components {
-  .gradient-text {
-    @apply bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent;
+  .wrap {
+    @apply mx-auto w-full max-w-[1200px] px-5 md:px-8;
   }
 
-  .gradient-bg {
-    @apply bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600;
+  .section {
+    @apply border-t border-line py-24 md:py-32;
   }
 
-  .glass-effect {
-    @apply backdrop-blur-md bg-gray-800/50 border border-gray-700/50 shadow-xl;
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.08em] text-muted;
   }
 
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:scale-105;
+  .h2 {
+    @apply text-3xl font-medium tracking-[-0.03em] text-ink md:text-[2.75rem] md:leading-[1.1];
   }
 
-  .section-padding {
-    @apply py-16 px-4 sm:px-6 lg:px-8;
-  }
-
-  .container-custom {
-    @apply max-w-6xl mx-auto;
-  }
-
-  .heading-gradient {
-    @apply bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-clip-text text-transparent;
-  }
-
-  .skill-card {
-    @apply bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1;
-  }
-
-  .project-card {
-    @apply bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1;
-  }
-
-  .nav-link {
-    @apply relative px-4 py-2 text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium;
-  }
-
-  .nav-link::after {
-    @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300;
-  }
-
-  .nav-link:hover::after {
-    @apply w-full;
-  }
-
-  .btn-primary {
-    @apply bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 hover:-translate-y-1;
-  }
-
-  .btn-secondary {
-    @apply border-2 border-gray-600 text-gray-300 px-6 py-3 rounded-lg font-semibold hover:border-blue-500 hover:text-blue-400 transition-all duration-300;
-  }
-
-  .section-title {
-    @apply text-3xl md:text-4xl font-bold text-center mb-4 heading-gradient;
-  }
-
-  .section-subtitle {
-    @apply text-lg text-gray-400 text-center mb-12 max-w-2xl mx-auto;
-  }
-
-  .grid-responsive {
-    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
-  }
-
-  .hero-gradient {
-    @apply bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900;
-  }
-
-  .floating-animation {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .gradient-border {
-    @apply relative;
-  }
-
-  .gradient-border::before {
-    @apply content-[''] absolute inset-0 rounded-xl p-[1px] bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-  }
-
-  /* 3D Effects */
-  .perspective-1000 {
-    perspective: 1000px;
-  }
-
-  .preserve-3d {
-    transform-style: preserve-3d;
-  }
-
-  .backface-hidden {
-    backface-visibility: hidden;
-  }
-
-  /* 3D Card Effect */
-  .card-3d {
-    @apply transition-all duration-300;
-    transform-style: preserve-3d;
-  }
-
-  .card-3d:hover {
-    transform: rotateY(10deg) rotateX(5deg) translateZ(20px);
-  }
-
-  /* 3D Text Effect */
-  .text-3d {
-    text-shadow: 
-      0 1px 0 #ccc,
-      0 2px 0 #c9c9c9,
-      0 3px 0 #bbb,
-      0 4px 0 #b9b9b9,
-      0 5px 0 #aaa,
-      0 6px 1px rgba(0,0,0,.1),
-      0 0 5px rgba(0,0,0,.1),
-      0 1px 3px rgba(0,0,0,.3),
-      0 3px 5px rgba(0,0,0,.2),
-      0 5px 10px rgba(0,0,0,.25),
-      0 10px 10px rgba(0,0,0,.2),
-      0 20px 20px rgba(0,0,0,.15);
-  }
-
-  /* Parallax Effect */
-  .parallax-bg {
-    background-attachment: fixed;
-    background-position: center;
+  /* 밑줄이 그려지는 텍스트 링크 */
+  .link {
+    @apply text-ink;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
     background-repeat: no-repeat;
-    background-size: cover;
+    transition: background-size 0.25s ease, color 0.2s ease;
+  }
+  .link:hover {
+    background-size: 100% 1px;
+    color: var(--accent);
   }
 
-  /* Mouse Trail Effect */
-  .mouse-trail {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
+  .btn {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md px-5 text-sm font-medium transition-[transform,background-color,border-color] duration-150 active:translate-y-px;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-accent-ink hover:bg-[#7cc8fd];
+  }
+  .btn-ghost {
+    @apply btn border border-line-strong text-ink hover:border-muted;
   }
 
-  /* Enhanced 3D Cube */
-  .cube-3d {
-    transform-style: preserve-3d;
-    animation: cube-rotate 20s infinite linear;
+  .tag {
+    @apply rounded border border-line px-2 py-0.5 font-mono text-[11px] text-muted;
   }
 
-  @keyframes cube-rotate {
-    0% { transform: rotateX(0deg) rotateY(0deg); }
-    100% { transform: rotateX(360deg) rotateY(360deg); }
+  /* 링크가 있는 카드만 2px 들립니다 */
+  .card {
+    @apply rounded-md border border-line bg-surface transition-[transform,border-color] duration-200;
+  }
+  .card-link:hover {
+    @apply -translate-y-0.5 border-line-strong;
   }
 
-  /* Glowing Effect */
-  .glow-effect {
-    box-shadow: 
-      0 0 20px rgba(59, 130, 246, 0.3),
-      0 0 40px rgba(59, 130, 246, 0.2),
-      0 0 60px rgba(59, 130, 246, 0.1);
-  }
-
-  .glow-effect:hover {
-    box-shadow: 
-      0 0 30px rgba(59, 130, 246, 0.5),
-      0 0 60px rgba(59, 130, 246, 0.3),
-      0 0 90px rgba(59, 130, 246, 0.2);
-  }
-
-  /* Particle Animation */
-  .particle {
-    position: absolute;
-    pointer-events: none;
-    animation: particle-float 3s infinite ease-in-out;
-  }
-
-  @keyframes particle-float {
-    0%, 100% { 
-      transform: translateY(0px) translateX(0px);
-      opacity: 0;
-    }
-    50% { 
-      transform: translateY(-20px) translateX(10px);
-      opacity: 1;
-    }
-  }
-
-  /* Magnetic Effect */
-  .magnetic {
-    transition: transform 0.3s ease;
-  }
-
-  .magnetic:hover {
-    transform: scale(1.05);
-  }
-
-  /* Smooth Scroll */
-  .smooth-scroll {
-    scroll-behavior: smooth;
-  }
-
-  /* Custom Scrollbar */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: rgba(31, 41, 55, 0.5);
-    border-radius: 4px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
-    border-radius: 4px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(to bottom, #2563eb, #7c3aed);
+  .field {
+    @apply w-full rounded-md border border-line bg-bg px-3.5 py-3 text-sm text-ink placeholder:text-faint transition-colors focus:border-muted focus:outline-none;
   }
 }
 
-@layer utilities {
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+/* 첫 화면만 한 번 들어옵니다. 스크롤에 따라 움직이는 것은 없습니다. */
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
-  
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  to {
+    opacity: 1;
+    transform: none;
   }
+}
 
-  .text-shadow {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+[data-enter] {
+  animation: enter 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 80ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* 3D Transform Utilities */
-  .rotate-3d-x {
-    transform: rotateX(var(--rotate-x, 0deg));
-  }
-
-  .rotate-3d-y {
-    transform: rotateY(var(--rotate-y, 0deg));
-  }
-
-  .rotate-3d-z {
-    transform: rotateZ(var(--rotate-z, 0deg));
-  }
-
-  .translate-3d-z {
-    transform: translateZ(var(--translate-z, 0px));
-  }
-
-  /* Animation Delays */
-  .delay-100 { animation-delay: 100ms; }
-  .delay-200 { animation-delay: 200ms; }
-  .delay-300 { animation-delay: 300ms; }
-  .delay-400 { animation-delay: 400ms; }
-  .delay-500 { animation-delay: 500ms; }
-
-  /* Hover Effects */
-  .hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .hover-lift:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  }
-
-  /* Gradient Text Animation */
-  .gradient-text-animate {
-    background: linear-gradient(-45deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
-    background-size: 400% 400%;
-    animation: gradient-shift 3s ease infinite;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  @keyframes gradient-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }

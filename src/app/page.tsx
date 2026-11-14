@@ -1,23 +1,28 @@
+import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import Projects from '@/components/Projects';
 import About from '@/components/About';
 import Skills from '@/components/Skills';
-import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
-import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import PWAInstallPrompt from '@/components/PWAInstallPrompt';
+import { getRecentActivity } from '@/lib/github';
 
-export default function Home() {
+export const revalidate = 3600;
+
+export default async function Home() {
+  const activity = await getRecentActivity();
+
   return (
-    <main className="min-h-screen">
+    <>
       <Header />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
+      <main>
+        <Hero activity={activity} />
+        <Projects />
+        <About />
+        <Skills />
+        <Contact />
+      </main>
       <Footer />
-      <PWAInstallPrompt />
-    </main>
+    </>
   );
 }
