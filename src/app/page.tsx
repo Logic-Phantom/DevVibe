@@ -17,7 +17,7 @@ export default async function Home() {
       <Header />
       <main>
         <Hero activity={activity} />
-        <Projects />
+        <Projects activity={activity} />
         <About />
         <Skills />
         <Contact />

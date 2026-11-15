@@ -1,4 +1,4 @@
-const CACHE_NAME = 'forest-lim-portfolio-v5';
+const CACHE_NAME = 'forest-lim-portfolio-v6';
 const urlsToCache = [
   '/',
   '/manifest.json',

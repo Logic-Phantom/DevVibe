@@ -31,7 +31,7 @@ export default function About() {
             <li key={p.title} className="grid gap-3 border-b border-line py-8 sm:grid-cols-[3rem_1fr]">
               <span className="font-mono text-sm text-faint">0{i + 1}</span>
               <div>
-                <h3 className="text-xl font-medium tracking-[-0.02em]">{p.title}</h3>
+                <h3 className="text-xl font-semibold tracking-[-0.025em]">{p.title}</h3>
                 <p className="mt-3 max-w-2xl leading-relaxed text-muted">{p.body}</p>
               </div>
             </li>

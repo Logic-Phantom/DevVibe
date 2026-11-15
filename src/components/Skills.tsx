@@ -12,7 +12,7 @@ const groups = [
     area: '웹',
     items: [
       { name: 'TypeScript', where: '거의 모든 저장소' },
-      { name: '앱인토스 SDK · Vite', where: '사잇, 점심합의, 내 차 어딨지?' },
+      { name: '앱인토스 SDK · Vite', where: '사잇, 점심합의, 내 차 어딨지?, 제출맞춤, 사이즈 어때?' },
       { name: 'Next.js · React', where: '이 사이트, 모바일 청첩장' },
       { name: 'Gatsby', where: 'TechLog 블로그' },
     ],

@@ -2,19 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 색은 여기서만 정합니다. 강조색(accent)은 주 버튼과 링크에만 씁니다. */
+/* 색은 여기서만 정합니다. 기본은 밝은 종이 톤, 헤더 버튼으로 어두운 화면을 고를 수 있습니다.
+   강조색(accent)은 주 버튼과 링크에만 씁니다. */
 :root {
-  --bg: #0b0d10;
-  --surface: #12151a;
-  --line: #23272e;
-  --line-strong: #343a43;
-  --ink: #e9ebee;
-  --muted: #949ba5;
-  --faint: #626a75;
-  --accent: #5ab9fc;
-  --accent-ink: #04121e;
+  --bg: #f4f2ec;
+  --surface: #fbfaf7;
+  --sunk: #ebe8e0;
+  --line: #dedad0;
+  --line-strong: #c9c4b8;
+  --ink: #17181b;
+  --muted: #565a62;
+  --faint: #8a8d93;
+  --accent: #2348d8;
+  --accent-hover: #1a3ab8;
+  --accent-ink: #ffffff;
+  --ok: #1f8a4c;
+  --wait: #b7791f;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #111214;
+  --surface: #18191c;
+  --sunk: #0c0d0e;
+  --line: #2a2c30;
+  --line-strong: #3b3e44;
+  --ink: #ecebe7;
+  --muted: #a3a49f;
+  --faint: #6e7074;
+  --accent: #8aa6ff;
+  --accent-hover: #a9bdff;
+  --accent-ink: #0b1230;
   --ok: #6fcf97;
   --wait: #e5b567;
+  color-scheme: dark;
 }
 
 @layer base {
@@ -28,8 +49,8 @@
     @apply antialiased;
     background: var(--bg);
     color: var(--ink);
-    font-feature-settings: 'ss01', 'tnum';
     word-break: keep-all;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   ::selection {
@@ -57,10 +78,9 @@
   }
 
   .h2 {
-    @apply text-3xl font-medium tracking-[-0.03em] text-ink md:text-[2.75rem] md:leading-[1.1];
+    @apply text-3xl font-semibold tracking-[-0.035em] text-ink md:text-[2.75rem] md:leading-[1.1];
   }
 
-  /* 밑줄이 그려지는 텍스트 링크 */
   .link {
     @apply text-ink;
     background-image: linear-gradient(currentColor, currentColor);
@@ -75,29 +95,33 @@
   }
 
   .btn {
-    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md px-5 text-sm font-medium transition-[transform,background-color,border-color] duration-150 active:translate-y-px;
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-6 text-sm font-medium transition-[transform,background-color,border-color] duration-150 active:translate-y-px;
   }
   .btn-primary {
-    @apply btn bg-accent text-accent-ink hover:bg-[#7cc8fd];
+    @apply btn bg-accent text-accent-ink hover:bg-accent-hover;
   }
   .btn-ghost {
-    @apply btn border border-line-strong text-ink hover:border-muted;
+    @apply btn border border-line-strong text-ink hover:border-ink;
   }
 
   .tag {
-    @apply rounded border border-line px-2 py-0.5 font-mono text-[11px] text-muted;
+    @apply rounded-full border border-line px-2.5 py-0.5 font-mono text-[11px] text-muted;
   }
 
-  /* 링크가 있는 카드만 2px 들립니다 */
   .card {
-    @apply rounded-md border border-line bg-surface transition-[transform,border-color] duration-200;
+    @apply rounded-2xl border border-line bg-surface transition-[transform,border-color,box-shadow] duration-200;
   }
   .card-link:hover {
     @apply -translate-y-0.5 border-line-strong;
+    box-shadow: 0 10px 30px -18px rgb(0 0 0 / 0.35);
+  }
+
+  .app-icon {
+    @apply shrink-0 overflow-hidden rounded-[22%] border border-line bg-white;
   }
 
   .field {
-    @apply w-full rounded-md border border-line bg-bg px-3.5 py-3 text-sm text-ink placeholder:text-faint transition-colors focus:border-muted focus:outline-none;
+    @apply w-full rounded-xl border border-line bg-bg px-3.5 py-3 text-sm text-ink placeholder:text-faint transition-colors focus:border-ink focus:outline-none;
   }
 }
 
@@ -115,7 +139,7 @@
 
 [data-enter] {
   animation: enter 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  animation-delay: calc(var(--i, 0) * 80ms);
+  animation-delay: calc(var(--i, 0) * 70ms);
 }
 
 @media (prefers-reduced-motion: reduce) {

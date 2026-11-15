@@ -1,103 +1,97 @@
-import { allProjects, repoUrl } from '@/data/projects';
+/* eslint-disable @next/next/no-img-element */
+import { allProjects, building, released, repoUrl } from '@/data/projects';
 import type { Activity } from '@/lib/github';
 
-const nameOf = new Map(allProjects.map((p) => [p.repo, p]));
+const byRepo = new Map(allProjects.map((p) => [p.repo, p]));
+const keywords = ['TypeScript', 'React Native', 'Next.js', 'Supabase', 'Spring', 'Unity'];
+const enter = (i: number) => ({ 'data-enter': true, style: { '--i': i } as React.CSSProperties });
 
 export default function Hero({ activity }: { activity: Activity[] }) {
+  const tossCount = released.filter((p) => p.platform === '토스 미니앱').length;
+
   return (
-    <section id="top" className="flex min-h-[100svh] items-center pb-16 pt-28 md:pt-24">
-      <div className="wrap grid w-full items-end gap-14 lg:grid-cols-[1.35fr_1fr] lg:gap-20">
+    <section id="top" className="flex min-h-[100svh] items-center pb-16 pt-28">
+      <div className="wrap grid w-full items-center gap-14 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
         <div>
-          <p className="eyebrow" data-enter style={{ '--i': 0 } as React.CSSProperties}>
-            서울 · 풀스택 개발자
+          <p className="eyebrow" {...enter(0)}>
+            Full-stack Developer · Seoul
           </p>
 
           <h1
-            className="mt-6 text-[2.35rem] font-medium leading-[1.12] tracking-[-0.035em] sm:text-5xl lg:text-[4rem]"
-            data-enter
-            style={{ '--i': 1 } as React.CSSProperties}
+            className="mt-5 text-[3rem] font-bold leading-[1.05] tracking-[-0.045em] sm:text-6xl lg:text-[5.25rem]"
+            {...enter(1)}
           >
-            토스 미니앱과
+            풀스택 개발자
             <br />
-            로컬 우선 모바일 앱을
-            <br />
-            만드는 임채명입니다.
+            임채명입니다.
           </h1>
 
-          <p
-            className="mt-7 max-w-[34rem] text-base leading-relaxed text-muted md:text-lg"
-            data-enter
-            style={{ '--i': 2 } as React.CSSProperties}
-          >
-            React Native·Expo, TypeScript, Supabase로 기획부터 스토어 심사까지 혼자 진행합니다. 무엇을
-            검증했고 무엇이 남았는지는 저장소 README에 그대로 적어 둡니다.
+          <ul className="mt-8 flex flex-wrap gap-2" {...enter(2)}>
+            {keywords.map((k) => (
+              <li key={k} className="rounded-full border border-line-strong px-3 py-1 font-mono text-xs text-muted">
+                {k}
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-7 max-w-[30rem] text-base leading-relaxed text-muted md:text-lg" {...enter(3)}>
+            아이디어를 직접 만들고, 테스트하고, 출시합니다.
           </p>
 
-          <dl
-            className="mt-10 grid max-w-[34rem] grid-cols-3 border-y border-line"
-            data-enter
-            style={{ '--i': 3 } as React.CSSProperties}
-          >
-            {[
-              { k: '출시', v: '2', note: '사잇 · 점심합의' },
-              { k: '심사 중', v: '1', note: '내 차 어딨지?' },
-              { k: '개발 중', v: '6', note: 'iOS · Android' },
-            ].map((s, i) => (
-              <div key={s.k} className={`py-4 ${i > 0 ? 'border-l border-line pl-4' : ''}`}>
-                <dt className="eyebrow">{s.k}</dt>
-                <dd className="mt-1 text-3xl font-medium tracking-[-0.03em]">{s.v}</dd>
-                <dd className="mt-1 truncate text-xs text-faint">{s.note}</dd>
-              </div>
-            ))}
-          </dl>
-
-          <div
-            className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6"
-            data-enter
-            style={{ '--i': 4 } as React.CSSProperties}
-          >
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4" {...enter(4)}>
             <a href="#work" className="btn-primary">
               작업 보기
             </a>
-            <a href="mailto:dlacoaud92@naver.com" className="btn-ghost sm:border-0 sm:px-0">
-              <span className="link">dlacoaud92@naver.com</span>
+            <a href="#contact" className="btn-ghost">
+              연락하기
             </a>
           </div>
         </div>
 
-        {/* 실제 GitHub 푸시 기록 (한 시간마다 갱신) */}
-        <div
-          className="card overflow-hidden font-mono text-[13px]"
-          data-enter
-          style={{ '--i': 5 } as React.CSSProperties}
-        >
-          <div className="flex items-center justify-between border-b border-line px-4 py-3 text-xs text-faint">
-            <span>최근 푸시</span>
-            <span>github.com/Logic-Phantom</span>
+        {/* 출시한 앱 — 각 저장소의 실제 아이콘 */}
+        <div className="card overflow-hidden" {...enter(5)}>
+          <div className="flex items-baseline justify-between gap-4 border-b border-line px-5 py-4">
+            <p className="text-sm font-semibold">
+              출시한 앱 <span className="ml-1 font-mono text-faint">{released.length}</span>
+            </p>
+            <p className="font-mono text-xs text-faint">
+              토스 미니앱 {tossCount} · Google Play {released.length - tossCount}
+            </p>
           </div>
-          <ol>
-            {activity.map((a) => {
-              const p = nameOf.get(a.repo);
-              return (
-                <li key={a.repo} className="border-b border-line last:border-0">
-                  <a
-                    href={repoUrl(a.repo)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group grid grid-cols-[5.5rem_1fr] gap-3 px-4 py-3 transition-colors hover:bg-[#161a20]"
-                  >
-                    <time className="text-faint" dateTime={a.pushedAt}>
-                      {a.pushedAt.slice(5).replace('-', '.')}
-                    </time>
-                    <span className="min-w-0">
-                      <span className="text-ink group-hover:text-accent">{a.repo}</span>
-                      {p && <span className="block truncate font-sans text-xs text-muted">{p.kind}</span>}
-                    </span>
-                  </a>
-                </li>
-              );
-            })}
-          </ol>
+          <ul className="grid grid-cols-3 gap-px bg-line">
+            {released.map((p) => (
+              <li key={p.id} className="bg-surface">
+                <a
+                  href={`#app-${p.id}`}
+                  className="group flex h-full flex-col items-center px-2 pb-4 pt-5 text-center transition-colors hover:bg-sunk"
+                >
+                  <img
+                    src={`/apps/${p.id}.webp`}
+                    alt=""
+                    width={56}
+                    height={56}
+                    className="app-icon h-14 w-14 transition-transform duration-200 group-hover:-translate-y-0.5"
+                  />
+                  <span className="mt-3 text-sm font-medium leading-tight">{p.name}</span>
+                  <span className="mt-0.5 text-[11px] text-faint">{p.platform}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-line px-5 py-3 font-mono text-xs text-faint">
+            <span>개발 중 {building.length}개</span>
+            {activity[0] && (
+              <a
+                href={repoUrl(activity[0].repo)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-ink"
+              >
+                최근 푸시 {activity[0].pushedAt.slice(5).replace('-', '.')} ·{' '}
+                {byRepo.get(activity[0].repo)?.name ?? activity[0].repo} ↗
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </section>

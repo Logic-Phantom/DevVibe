@@ -12,6 +12,32 @@ const nav = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => setDark(document.documentElement.dataset.theme === 'dark'), []);
+
+  const toggleTheme = () => {
+    const next = !dark;
+    setDark(next);
+    if (next) document.documentElement.dataset.theme = 'dark';
+    else delete document.documentElement.dataset.theme;
+    try {
+      localStorage.setItem('theme', next ? 'dark' : 'light');
+    } catch {}
+  };
+
+  const themeButton = (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={dark ? '밝은 화면으로' : '어두운 화면으로'}
+      className="flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:text-ink"
+    >
+      <span aria-hidden className="relative block h-4 w-4 overflow-hidden rounded-full border border-current">
+        <span className={`absolute inset-y-0 right-0 bg-current transition-[width] duration-200 ${dark ? 'w-full' : 'w-1/2'}`} />
+      </span>
+    </button>
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -35,7 +61,7 @@ export default function Header() {
     >
       <div className="wrap flex h-16 items-center justify-between">
         <a href="#top" className="flex items-baseline gap-2" onClick={() => setOpen(false)}>
-          <span className="text-[15px] font-semibold tracking-[-0.02em]">임채명</span>
+          <span className="text-[15px] font-bold tracking-[-0.02em]">임채명</span>
           <span className="font-mono text-xs text-faint">Forest_LIM</span>
         </a>
 
@@ -53,11 +79,14 @@ export default function Header() {
           >
             GitHub ↗
           </a>
+          <span className="-ml-4">{themeButton}</span>
         </nav>
 
+        <div className="-mr-2 flex items-center md:hidden">
+        {themeButton}
         <button
           type="button"
-          className="-mr-2 flex h-11 w-11 items-center justify-center md:hidden"
+          className="flex h-11 w-11 items-center justify-center"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? '메뉴 닫기' : '메뉴 열기'}
@@ -76,6 +105,7 @@ export default function Header() {
             />
           </span>
         </button>
+        </div>
       </div>
 
       {open && (

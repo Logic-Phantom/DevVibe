@@ -5,11 +5,14 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: ['selector', '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
         bg: 'var(--bg)',
         surface: 'var(--surface)',
+        sunk: 'var(--sunk)',
+        'accent-hover': 'var(--accent-hover)',
         line: 'var(--line)',
         'line-strong': 'var(--line-strong)',
         ink: 'var(--ink)',

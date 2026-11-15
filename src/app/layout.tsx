@@ -3,7 +3,7 @@ import { IBM_Plex_Sans_KR, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 
 const sans = IBM_Plex_Sans_KR({
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
@@ -18,14 +18,14 @@ const mono = IBM_Plex_Mono({
 
 const title = '임채명 — 풀스택 개발자';
 const description =
-  '토스 미니앱과 로컬 우선 모바일 앱을 만드는 개발자 임채명(Forest_LIM)의 포트폴리오. 사잇·점심합의 출시, 내 차 어딨지? 심사 중.';
+  '풀스택 개발자 임채명(Forest_LIM)의 포트폴리오. TypeScript·React Native·Next.js로 토스 미니앱 5개와 Android 앱을 출시했습니다.';
 
 export const metadata: Metadata = {
   title,
   description,
   manifest: '/manifest.json',
   openGraph: { title, description, type: 'website', locale: 'ko_KR' },
-  appleWebApp: { capable: true, statusBarStyle: 'black-translucent', title: '임채명' },
+  appleWebApp: { capable: true, statusBarStyle: 'default', title: '임채명' },
   formatDetection: { telephone: false },
   icons: {
     icon: [
@@ -39,9 +39,14 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0b0d10',
-  colorScheme: 'dark',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f4f2ec' },
+    { media: '(prefers-color-scheme: dark)', color: '#111214' },
+  ],
 };
+
+// 저장된 테마를 그리기 전에 적용합니다(깜빡임 방지). 기본은 밝은 화면.
+const themeScript = `try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.dataset.theme="dark"}catch(e){}`;
 
 const swScript = `
 if ('serviceWorker' in navigator) {
@@ -64,8 +69,9 @@ if ('serviceWorker' in navigator) {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ko" className={`${sans.variable} ${mono.variable}`}>
+    <html lang="ko" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script dangerouslySetInnerHTML={{ __html: swScript }} />
       </head>
       <body className="font-sans">{children}</body>
