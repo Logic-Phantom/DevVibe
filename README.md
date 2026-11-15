@@ -33,6 +33,7 @@ src/
 │   ├── Contact.tsx         # 연락처 + 메일 폼 (client)
 │   └── Footer.tsx
 └── data/projects.ts        # 프로젝트 내용 — 내용을 바꿀 때는 여기만 고치면 됩니다
+scripts/list-repos.mjs      # 저장소 목록 (API 없이 github.com 공개 페이지)
 scripts/fetch-icon.mjs      # 저장소 아이콘 → public/apps/<id>.webp
 docs/AUTO_UPDATE.md         # 매일 자동 갱신 규칙
 ```

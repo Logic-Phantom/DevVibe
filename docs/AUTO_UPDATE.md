@@ -5,10 +5,13 @@
 
 ## 할 일
 
-1. GitHub 공개 저장소 목록을 받습니다.
-   `curl -s "https://api.github.com/users/Logic-Phantom/repos?per_page=100&sort=pushed"`
-2. 최근 2일 안에 푸시된 저장소, 그리고 `projects.ts`에 없는 새 저장소의 README를 읽습니다.
+1. 저장소 목록을 받습니다: `node scripts/list-repos.mjs`
+   클라우드 세션에서는 `api.github.com`의 사용자·다른 저장소 엔드포인트가 막혀 있으니 쓰지 않습니다.
+   이 스크립트는 github.com 공개 페이지 → 활동 피드 → `projects.ts` 순서로 목록을 만듭니다.
+   stderr에 `projects.ts`만 쓰였다고 나오면 새 저장소는 찾지 못한 것이니 보고에 적습니다.
+2. 목록에서 “넣지 않는 저장소”를 뺀 나머지 저장소의 README를 모두 읽습니다(푸시 날짜로 거르지 않습니다).
    `curl -sL https://raw.githubusercontent.com/Logic-Phantom/<repo>/HEAD/README.md`
+   README의 현재 상태와 `projects.ts`를 비교해 달라진 부분만 고칩니다.
 3. 아래 규칙에 맞춰 `src/data/projects.ts`만 고칩니다. 새 앱에 아이콘이 있으면 `scripts/fetch-icon.mjs`로 받습니다.
 4. `npm ci && npx tsc --noEmit && npm run lint && npm run build`가 모두 통과할 때만 커밋하고 `master`에 푸시합니다.
 5. 바꿀 것이 없으면 아무것도 커밋하지 않습니다.
