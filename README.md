@@ -8,12 +8,12 @@
 
 ## 동작 방식
 
-- `src/app/page.tsx`는 서버 컴포넌트입니다. 빌드할 때 GitHub API에서 최근 푸시한 저장소 목록을 받아 “최근 푸시” 목록(작업 섹션)과 히어로의 최근 푸시 한 줄을 만들고, `revalidate = 3600`으로 한 시간마다 다시 생성합니다(ISR).
-- GitHub API 호출이 실패하거나 제한에 걸리면 `src/data/projects.ts`의 `fallbackActivity`를 씁니다. 요청 한도를 늘리려면 Vercel 환경 변수에 `GITHUB_TOKEN`을 넣으세요.
+- 페이지는 빌드할 때 정적으로 만들어집니다. 내용은 모두 `src/data/projects.ts`에서 옵니다.
+- 매일 한 번 클라우드 에이전트(Claude Code 루틴)가 GitHub 저장소 README를 읽고 `projects.ts`를 갱신해 `master`에 푸시하면 Vercel이 다시 배포합니다. 규칙은 [docs/AUTO_UPDATE.md](docs/AUTO_UPDATE.md).
 - 프로젝트 소개 문구는 각 저장소 README에서 옮겨 `src/data/projects.ts`에 둡니다. 앱 아이콘은 각 저장소의 아이콘을 160px WebP로 줄여 `public/apps/<id>.webp`에 둡니다.
 - 기본은 밝은 화면이고, 헤더 버튼으로 어두운 화면을 고를 수 있습니다(`localStorage.theme`, `<html data-theme="dark">`).
 - 연락 폼은 `/api/contact`(nodemailer)로 메일을 보냅니다. `NAVER_APP_PASSWORD`(필요하면 `NAVER_USER`) 환경 변수가 필요합니다.
-- `public/sw.js` 서비스 워커와 `public/manifest.json`으로 홈 화면에 추가할 수 있습니다. 디자인을 크게 바꾸면 `CACHE_NAME` 버전을 올려 주세요.
+- `public/sw.js` 서비스 워커와 `public/manifest.json`으로 홈 화면에 추가할 수 있습니다. 페이지는 네트워크 우선이라 내용 갱신에는 캐시 버전을 올릴 필요가 없고, `sw.js` 자체를 바꿀 때만 `CACHE_NAME`을 올립니다.
 
 ## 구조
 
@@ -21,19 +21,20 @@
 src/
 ├── app/
 │   ├── layout.tsx          # 폰트, 메타데이터, 서비스 워커 등록
-│   ├── page.tsx            # 섹션 조립 + GitHub 활동 불러오기 (ISR 1시간)
+│   ├── page.tsx            # 섹션 조립
 │   ├── globals.css         # 색 토큰(:root), 공통 클래스, 첫 화면 진입 애니메이션
 │   └── api/contact/route.ts
 ├── components/
 │   ├── Header.tsx          # 고정 헤더, 모바일 전체 화면 메뉴 (client)
-│   ├── Hero.tsx            # 첫 화면: 소개, 숫자 요약, 최근 푸시 목록
+│   ├── Hero.tsx            # 첫 화면: 소개, 기술 키워드, 출시한 앱 아이콘
 │   ├── Projects.tsx        # 출시·심사 / 개발 중 / 이전 작업
 │   ├── About.tsx           # 일하는 방식
 │   ├── Skills.tsx          # 스택과 실제 쓰는 저장소
 │   ├── Contact.tsx         # 연락처 + 메일 폼 (client)
 │   └── Footer.tsx
-├── data/projects.ts        # 프로젝트 내용 — 내용을 바꿀 때는 여기만 고치면 됩니다
-└── lib/github.ts           # GitHub 최근 푸시 조회
+└── data/projects.ts        # 프로젝트 내용 — 내용을 바꿀 때는 여기만 고치면 됩니다
+scripts/fetch-icon.mjs      # 저장소 아이콘 → public/apps/<id>.webp
+docs/AUTO_UPDATE.md         # 매일 자동 갱신 규칙
 ```
 
 ## 디자인 원칙

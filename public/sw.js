@@ -1,4 +1,4 @@
-const CACHE_NAME = 'forest-lim-portfolio-v6';
+const CACHE_NAME = 'forest-lim-portfolio-v7';
 const urlsToCache = [
   '/',
   '/manifest.json',
@@ -55,7 +55,24 @@ self.addEventListener('fetch', (event) => {
     return; // Let the network handle it
   }
 
-  // For our predefined static assets, use cache-first
+  // Pages: network-first so daily content updates show up immediately.
+  // The latest copy is kept for offline use only.
+  if (request.mode === 'navigate' || url.pathname === '/') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put('/', copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match('/'))
+    );
+    return;
+  }
+
+  // Icons and manifest: cache-first
   if (urlsToCache.includes(url.pathname)) {
     event.respondWith(
       caches.match(request).then((cached) => {

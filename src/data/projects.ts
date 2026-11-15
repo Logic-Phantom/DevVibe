@@ -228,12 +228,3 @@ export const earlier: Project[] = [
 
 export const allProjects = [...released, ...building, ...earlier];
 
-// GitHub API를 못 쓸 때 보여 줄 최근 푸시 목록 (2026-11-14 기준)
-export const fallbackActivity = [
-  { repo: 'gyushot', pushedAt: '2026-11-14' },
-  { repo: 'SizeNote', pushedAt: '2026-11-14' },
-  { repo: 'TechLog', pushedAt: '2026-11-14' },
-  { repo: 'CutPick', pushedAt: '2026-11-12' },
-  { repo: 'GudoPick', pushedAt: '2026-11-12' },
-  { repo: 'OurShare', pushedAt: '2026-11-11' },
-];

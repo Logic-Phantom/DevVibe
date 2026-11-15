@@ -1,8 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { allProjects, building, earlier, released, repoUrl, STATUS_LABEL, type Project } from '@/data/projects';
-import type { Activity } from '@/lib/github';
-
-const byRepo = new Map(allProjects.map((p) => [p.repo, p]));
+import { building, earlier, released, repoUrl, STATUS_LABEL, type Project } from '@/data/projects';
 
 const dot: Record<Project['status'], string> = {
   released: 'bg-ok',
@@ -46,7 +43,7 @@ function Links({ p }: { p: Project }) {
   );
 }
 
-export default function Projects({ activity }: { activity: Activity[] }) {
+export default function Projects() {
   return (
     <section id="work" className="section">
       <div className="wrap">
@@ -127,8 +124,8 @@ export default function Projects({ activity }: { activity: Activity[] }) {
           ))}
         </ul>
 
-        {/* 이전 작업 + 최근 활동 */}
-        <div className="mt-20 grid gap-14 lg:grid-cols-[1.4fr_1fr]">
+        {/* 이전 작업 */}
+        <div className="mt-20">
           <div>
             <h3 className="eyebrow">이전 작업</h3>
             <ul className="mt-5 border-t border-line">
@@ -148,34 +145,14 @@ export default function Projects({ activity }: { activity: Activity[] }) {
             </ul>
           </div>
 
-          <div>
-            <h3 className="eyebrow">최근 푸시 · GitHub</h3>
-            <ol className="mt-5 border-t border-line font-mono text-[13px]">
-              {activity.map((a) => (
-                <li key={a.repo} className="border-b border-line">
-                  <a
-                    href={repoUrl(a.repo)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-baseline justify-between gap-4 py-3"
-                  >
-                    <span className="group-hover:text-accent">{byRepo.get(a.repo)?.name ?? a.repo}</span>
-                    <time className="text-faint" dateTime={a.pushedAt}>
-                      {a.pushedAt.replaceAll('-', '.')}
-                    </time>
-                  </a>
-                </li>
-              ))}
-            </ol>
-            <a
-              href="https://github.com/Logic-Phantom?tab=repositories"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost mt-8 w-full"
-            >
-              전체 저장소 보기 ↗
-            </a>
-          </div>
+          <a
+            href="https://github.com/Logic-Phantom?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-ghost mt-10 w-full sm:w-auto"
+          >
+            전체 저장소 보기 ↗
+          </a>
         </div>
       </div>
     </section>

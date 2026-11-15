@@ -1,12 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { allProjects, building, released, repoUrl } from '@/data/projects';
-import type { Activity } from '@/lib/github';
+import { building, released } from '@/data/projects';
 
-const byRepo = new Map(allProjects.map((p) => [p.repo, p]));
 const keywords = ['TypeScript', 'React Native', 'Next.js', 'Supabase', 'Spring', 'Unity'];
 const enter = (i: number) => ({ 'data-enter': true, style: { '--i': i } as React.CSSProperties });
 
-export default function Hero({ activity }: { activity: Activity[] }) {
+export default function Hero() {
   const tossCount = released.filter((p) => p.platform === '토스 미니앱').length;
 
   return (
@@ -80,17 +78,9 @@ export default function Hero({ activity }: { activity: Activity[] }) {
           </ul>
           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-line px-5 py-3 font-mono text-xs text-faint">
             <span>개발 중 {building.length}개</span>
-            {activity[0] && (
-              <a
-                href={repoUrl(activity[0].repo)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors hover:text-ink"
-              >
-                최근 푸시 {activity[0].pushedAt.slice(5).replace('-', '.')} ·{' '}
-                {byRepo.get(activity[0].repo)?.name ?? activity[0].repo} ↗
-              </a>
-            )}
+            <a href="#work" className="transition-colors hover:text-ink">
+              전체 작업 보기 ↓
+            </a>
           </div>
         </div>
       </div>

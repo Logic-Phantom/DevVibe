@@ -5,19 +5,14 @@ import About from '@/components/About';
 import Skills from '@/components/Skills';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import { getRecentActivity } from '@/lib/github';
 
-export const revalidate = 3600;
-
-export default async function Home() {
-  const activity = await getRecentActivity();
-
+export default function Home() {
   return (
     <>
       <Header />
       <main>
-        <Hero activity={activity} />
-        <Projects activity={activity} />
+        <Hero />
+        <Projects />
         <About />
         <Skills />
         <Contact />
