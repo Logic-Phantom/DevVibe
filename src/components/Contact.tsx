@@ -112,7 +112,7 @@ export default function Contact() {
               </div>
 
               {error && (
-                <p className="rounded-md border border-red-500/40 bg-red-500/10 px-3.5 py-3 text-sm text-red-700 dark:text-red-300" role="alert">
+                <p className="rounded-md border border-danger-line bg-danger-soft px-3.5 py-3 text-sm text-danger" role="alert">
                   {error}
                 </p>
               )}

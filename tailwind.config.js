@@ -22,6 +22,9 @@ module.exports = {
         'accent-ink': 'var(--accent-ink)',
         ok: 'var(--ok)',
         wait: 'var(--wait)',
+        danger: 'var(--danger)',
+        'danger-soft': 'var(--danger-soft)',
+        'danger-line': 'var(--danger-line)',
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
