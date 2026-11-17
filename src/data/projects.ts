@@ -1,4 +1,4 @@
-// 각 저장소 README(2026-11-16 기준)와 본인 확인을 바탕으로 정리한 내용입니다.
+// 각 저장소 README(2026-11-17 기준)와 본인 확인을 바탕으로 정리한 내용입니다.
 // 새 소식이 생기면 이 파일만 고치면 됩니다. 아이콘은 public/apps/<id>.webp (160px).
 
 export type ProjectStatus = 'released' | 'building' | 'live' | 'archived';
@@ -190,7 +190,7 @@ export const building: Project[] = [
     kind: '자동화 작업 관제',
     platform: '웹',
     summary:
-      '여러 GitHub 저장소와 자동화 작업을 한곳에서 감시·운영하고, 매일 오전 7시(한국 시간) 카카오톡 나와의 채팅으로 운영 보고서를 보내는 개인용 관제 시스템입니다.',
+      '여러 GitHub 저장소와 자동화 작업을 한곳에서 감시·운영하고, 매일 낮 12시(한국 시간) 카카오톡 나와의 채팅으로 운영 보고서를 보내는 개인용 관제 시스템입니다.',
     facts: ['GitHub Actions 실행 폴링', '테스트 71개 · E2E 3개'],
     stack: ['React 19', 'Cloudflare Workers', 'D1'],
     status: 'building',
