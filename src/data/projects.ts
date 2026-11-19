@@ -1,4 +1,4 @@
-// 각 저장소 README(2026-11-18 기준)와 본인 확인을 바탕으로 정리한 내용입니다.
+// 각 저장소 README(2026-11-19 기준)와 본인 확인을 바탕으로 정리한 내용입니다.
 // 새 소식이 생기면 이 파일만 고치면 됩니다. 아이콘은 public/apps/<id>.webp (160px).
 
 export type ProjectStatus = 'released' | 'building' | 'live' | 'archived';
@@ -181,6 +181,19 @@ export const building: Project[] = [
     stack: ['Unity 6', 'URP', 'C#'],
     status: 'building',
     statusNote: '에디터 테스트 전',
+    icon: true,
+  },
+  {
+    id: 'moodmix',
+    repo: 'MoodMix',
+    name: '무드믹스',
+    kind: '키워드 플레이리스트',
+    platform: 'iOS · Android',
+    summary: '키워드 한 줄이나 좋아하는 곡 하나로 플레이리스트를 만들어 YouTube Music으로 보냅니다. 음원은 재생하거나 내려받지 않습니다.',
+    facts: ['실제 곡 6,711곡 내장', '단위 테스트 85개', '회원가입·서버 없음'],
+    stack: ['React Native', 'Expo', 'SQLite'],
+    status: 'building',
+    statusNote: '실기기 미검증',
     icon: true,
   },
   {
