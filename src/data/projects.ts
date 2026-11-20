@@ -1,8 +1,8 @@
-// 각 저장소 README(2026-11-19 기준)와 본인 확인을 바탕으로 정리한 내용입니다.
+// 각 저장소 README(2026-11-20 기준)와 본인 확인을 바탕으로 정리한 내용입니다.
 // 새 소식이 생기면 이 파일만 고치면 됩니다. 아이콘은 public/apps/<id>.webp (160px).
 
 export type ProjectStatus = 'released' | 'building' | 'live' | 'archived';
-export type Platform = '토스 미니앱' | 'Google Play' | 'iOS · Android' | '웹' | '게임';
+export type Platform = '토스 미니앱' | 'Google Play' | 'iOS · Android' | '데스크톱' | '웹' | '게임';
 
 export interface Project {
   id: string; // 아이콘 파일 이름
@@ -208,6 +208,20 @@ export const building: Project[] = [
     stack: ['React 19', 'Cloudflare Workers', 'D1'],
     status: 'building',
     statusNote: '개인 운영 중 · 정기 보고서 수신 확인 전',
+    icon: true,
+  },
+  {
+    id: 'autodesk',
+    repo: 'AutoDesk',
+    name: 'AutoDesk',
+    kind: '개인용 PC 자동화',
+    platform: '데스크톱',
+    summary:
+      'PC에 상주하면서 폴더 파일 버전 백업, 다운로드 파일 분류, 클립보드 텍스트 정리, 로그 오류 감지를 조용히 처리합니다. 파일을 옮기는 일은 승인 센터에서 확인받습니다.',
+    facts: ['Windows · macOS', 'Rust 테스트 38개', '오프라인 동작 · 텔레메트리 없음'],
+    stack: ['Tauri 2', 'React 19', 'Rust'],
+    status: 'building',
+    statusNote: 'v0.2.0 · macOS 미검증',
     icon: true,
   },
 ];
