@@ -1,4 +1,4 @@
-// 각 저장소 README(2026-11-20 기준)와 본인 확인을 바탕으로 정리한 내용입니다.
+// 각 저장소 README(2026-11-21 기준)와 본인 확인을 바탕으로 정리한 내용입니다.
 // 새 소식이 생기면 이 파일만 고치면 됩니다. 아이콘은 public/apps/<id>.webp (160px).
 
 export type ProjectStatus = 'released' | 'building' | 'live' | 'archived';
@@ -204,7 +204,7 @@ export const building: Project[] = [
     platform: '웹',
     summary:
       '여러 GitHub 저장소와 자동화 작업을 한곳에서 감시·운영하고, 매일 오전 8시(한국 시간) 카카오톡 나와의 채팅으로 운영 보고서를 보내는 개인용 관제 시스템입니다.',
-    facts: ['GitHub Actions 실행 폴링', '테스트 79개 · E2E 3개'],
+    facts: ['GitHub Actions 실행 폴링', '테스트 84개 · E2E 3개'],
     stack: ['React 19', 'Cloudflare Workers', 'D1'],
     status: 'building',
     statusNote: '개인 운영 중 · 정기 보고서 수신 확인 전',
@@ -217,11 +217,11 @@ export const building: Project[] = [
     kind: '개인용 PC 자동화',
     platform: '데스크톱',
     summary:
-      'PC에 상주하면서 폴더 파일 버전 백업, 다운로드 파일 분류, 클립보드 텍스트 정리, 로그 오류 감지를 조용히 처리합니다. 파일을 옮기는 일은 승인 센터에서 확인받습니다.',
-    facts: ['Windows · macOS', 'Rust 테스트 38개', '오프라인 동작 · 텔레메트리 없음'],
+      'PC에 상주하면서 폴더 파일 버전 백업, 다운로드 파일 분류, 클립보드 텍스트 정리를 조용히 처리합니다. 파일을 옮기는 일은 승인 센터에서 확인받고, 업무 모드와 캡처·표 변환·문서 비교 도구도 있습니다.',
+    facts: ['Windows · macOS', 'Rust 테스트 48개', '오프라인 동작 · 텔레메트리 없음'],
     stack: ['Tauri 2', 'React 19', 'Rust'],
     status: 'building',
-    statusNote: 'v0.2.0 · macOS 미검증',
+    statusNote: 'v0.4.1 · macOS 미검증',
     icon: true,
   },
 ];
