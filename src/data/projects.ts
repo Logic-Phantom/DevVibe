@@ -1,4 +1,4 @@
-// 각 저장소 README(2026-11-21 기준)와 본인 확인을 바탕으로 정리한 내용입니다.
+// 각 저장소 README(2026-11-23 기준)와 본인 확인을 바탕으로 정리한 내용입니다.
 // 새 소식이 생기면 이 파일만 고치면 됩니다. 아이콘은 public/apps/<id>.webp (160px).
 
 export type ProjectStatus = 'released' | 'building' | 'live' | 'archived';
@@ -218,11 +218,24 @@ export const building: Project[] = [
     platform: '데스크톱',
     summary:
       'PC에 상주하면서 폴더 파일 버전 백업, 다운로드 파일 분류, 클립보드 텍스트 정리를 조용히 처리합니다. 파일을 옮기는 일은 승인 센터에서 확인받고, 업무 모드와 캡처·표 변환·문서 비교 도구도 있습니다.',
-    facts: ['Windows · macOS', 'Rust 테스트 48개', '오프라인 동작 · 텔레메트리 없음'],
+    facts: ['Windows · macOS', 'Rust 테스트 58개', '오프라인 동작 · 텔레메트리 없음'],
     stack: ['Tauri 2', 'React 19', 'Rust'],
     status: 'building',
     statusNote: 'v0.4.1 · macOS 미검증',
     icon: true,
+  },
+  {
+    id: 'cloudrepo',
+    repo: 'CloudRepo',
+    name: 'RepoVault',
+    kind: 'Git 저장소 자동 백업',
+    platform: '데스크톱',
+    summary:
+      'GitHub와 일반 Git 원격 저장소를 매일 Google Drive에 백업하고, 다른 PC에서 Drive만으로 복원합니다. GitHub에서 브랜치를 지우거나 강제 푸시해도 Drive에는 과거 상태가 남습니다.',
+    facts: ['저장소 36개 첫 전체 백업', 'GitHub Actions 클라우드 백업', '테스트 47개'],
+    stack: ['Electron', 'React', 'TypeScript'],
+    status: 'building',
+    statusNote: 'macOS 운영 중 · Windows 미검증',
   },
 ];
 
