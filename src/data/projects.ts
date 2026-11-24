@@ -232,7 +232,7 @@ export const building: Project[] = [
     platform: '데스크톱',
     summary:
       'GitHub와 일반 Git 원격 저장소를 매일 Google Drive에 백업하고, 다른 PC에서 Drive만으로 복원합니다. GitHub에서 브랜치를 지우거나 강제 푸시해도 Drive에는 과거 상태가 남습니다.',
-    facts: ['저장소 36개 첫 전체 백업', 'GitHub Actions 클라우드 백업', '테스트 47개'],
+    facts: ['저장소 36개 첫 전체 백업', 'GitHub Actions 클라우드 백업', '테스트 49개'],
     stack: ['Electron', 'React', 'TypeScript'],
     status: 'building',
     statusNote: 'macOS 운영 중 · Windows 미검증',
