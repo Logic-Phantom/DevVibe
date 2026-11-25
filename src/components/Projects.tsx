@@ -50,7 +50,7 @@ export default function Projects() {
         <div className="grid gap-6 md:grid-cols-[1fr_1.3fr] md:items-end">
           <h2 className="h2">작업</h2>
           <p className="max-w-xl text-muted md:justify-self-end">
-            2026년 가을에 토스 미니앱 다섯 개와 Android 앱 하나를 출시했고, 모바일 앱 다섯 개, 게임 하나,
+            2026년 가을에 토스 미니앱 다섯 개와 Android 앱 하나를 출시했고, 모바일 앱 여섯 개, 게임 하나,
             개인용 관제 웹 하나, 데스크톱 앱 둘을 만들고 있습니다. 설명과 숫자는 각 저장소 README를 따릅니다.
           </p>
         </div>
