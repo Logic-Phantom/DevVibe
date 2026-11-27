@@ -232,7 +232,7 @@ export const building: Project[] = [
     platform: '데스크톱',
     summary:
       'PC에 상주하면서 폴더 파일 버전 백업, 다운로드 파일 분류, 클립보드 텍스트 정리를 조용히 처리합니다. 파일을 옮기는 일은 승인 센터에서 확인받고, 업무 모드와 캡처·표 변환·문서 비교 도구도 있습니다.',
-    facts: ['Windows · macOS', 'Rust 테스트 158개', '오프라인 동작 · 텔레메트리 없음'],
+    facts: ['Windows · macOS', 'Rust 테스트 179개', '오프라인 동작 · 텔레메트리 없음'],
     stack: ['Tauri 2', 'React 19', 'Rust'],
     status: 'building',
     statusNote: 'v0.4.1 · macOS 미검증',
