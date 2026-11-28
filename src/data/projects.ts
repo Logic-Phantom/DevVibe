@@ -2,7 +2,7 @@
 // 새 소식이 생기면 이 파일만 고치면 됩니다. 아이콘은 public/apps/<id>.webp (160px).
 
 export type ProjectStatus = 'released' | 'building' | 'live' | 'archived';
-export type Platform = '토스 미니앱' | 'Google Play' | 'iOS · Android' | '데스크톱' | '웹' | '게임';
+export type Platform = '토스 미니앱' | 'Google Play' | 'iOS · Android' | 'Android' | '데스크톱' | '웹' | '게임';
 
 export interface Project {
   id: string; // 아이콘 파일 이름
@@ -209,6 +209,19 @@ export const building: Project[] = [
     status: 'building',
     statusNote: 'Android 실기기 미검증',
     icon: true,
+  },
+  {
+    id: 'dailyroll',
+    repo: 'DaliyMoney',
+    name: 'DailyRoll',
+    kind: '하루 예산 위젯',
+    platform: 'Android',
+    summary:
+      '결제 알림을 스마트폰 안에서만 읽어 지출을 기록하고, 하루 예산의 남은 금액을 이번 달 안에서 다음 날로 이월해 홈 화면 위젯에 보여 줍니다.',
+    facts: ['코어 Kotlin 테스트 82개', '서버·회원가입·광고 SDK 없음', '배포용 빌드에 인터넷 권한 없음'],
+    stack: ['React Native', 'Expo', 'Kotlin', 'SQLite'],
+    status: 'building',
+    statusNote: '실기기 QA 전',
   },
   {
     id: 'automatehq',
